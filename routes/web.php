@@ -28,7 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 |
 */
 
-Route::group(['prefix'=>'admin','middleware'=>admin::class],function (){
+Route::group(['prefix'=>'admin'],function (){
 Route::resource('shoe', 'shoeController');
 Route::resource('modele', 'ModeleController');
 Route::resource('size', 'sizeController');

@@ -9,7 +9,7 @@ class Modele extends Model
 
     protected $table = 'modeles';
     public $timestamps = true;
-    protected $fillable = array('idGender', 'idBrand', 'idReduction', 'idType', 'price', 'image');
+    protected $fillable = array('name','color','idGender', 'idBrand', 'idReduction', 'idType', 'price', 'image');
     protected $visible = array('color', 'idGender', 'idBrand', 'idReduction', 'idType', 'price', 'image');
 
     public function model_gender()

@@ -9,7 +9,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.adminHome');
+        $countModel=\App\Modele::count();
+        return view('admin.adminHome',compact(['countModel']));
 //        redirect ('admin');
     }
 

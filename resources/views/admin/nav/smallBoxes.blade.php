@@ -5,7 +5,7 @@
         <div class="small-box bg-aqua">
             <div class="inner">
                 <h3>
-                    150
+                    {{$countModel}}
                 </h3>
                 <p>
                     Produits

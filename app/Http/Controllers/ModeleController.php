@@ -1,6 +1,8 @@
 <?php 
 
 namespace App\Http\Controllers;
+use App\Modele;
+use Illuminate\Http\Request;
 
 class ModeleController extends Controller 
 {
@@ -12,7 +14,12 @@ class ModeleController extends Controller
    */
   public function index()
   {
-    
+    $modeleList= \App\Modele::orderBy('idGender')->get();
+    $genderList =\App\Gender::orderBy('id')->pluck('name', 'id');
+
+      return view('admin.modele.index',compact(['modeleList','genderList']));
+
+    dd($modeleList);
   }
 
   /**
@@ -22,7 +29,10 @@ class ModeleController extends Controller
    */
   public function create()
   {
-    
+      $genderList =\App\Gender::orderBy('name')->pluck('name', 'id');
+      $typeList =\App\Type::orderBy('name')->pluck('name', 'id');
+      $brandList =\App\Brand::orderBy('name')->pluck('name', 'id');;
+      return view('admin.modele.create',compact(['brandList','typeList','genderList']));
   }
 
   /**
@@ -30,9 +40,25 @@ class ModeleController extends Controller
    *
    * @return Response
    */
-  public function store()
+  public function store(Request $request)
   {
-    
+      $this->validate($request, [
+          'name' => 'bail|required|unique:modeles|max:100',
+          'price' => 'bail|required|numeric',
+          'color'=>'bail|required|max:100',
+          'idGender'=>'required',
+          'idBrand' => 'required',
+          'idType'=>'required'
+
+      ]);
+
+      $model = $request->all();
+      $nom= $request->file('image')->getClientOriginalName();
+      $model['image']=$nom;
+      $model['idReduction']=1;
+//      dd($model);
+      \App\Modele::create($model);
+      return 'ok on y est';
   }
 
   /**

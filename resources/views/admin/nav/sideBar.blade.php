@@ -27,6 +27,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
+                    <li><a href="{{route('modele.index')}}"><i class="fa fa-chevron-right"></i>Tout</a></li>
+
                     <li><a href="#"><i class="fa fa-chevron-right"></i> Femme</a></li>
                     <li><a href="#"><i class="fa fa-chevron-right"></i> Homme</a></li>
                     <li><a href="#"><i class="fa fa-chevron-right"></i> Enfant</a></li>
@@ -40,7 +42,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-chevron-right"></i> Afficher le stock</a></li>
-                    <li><a href="#"><i class="fa fa-chevron-right"></i> Ajouter un modéle</a></li>
+                    <li><a href="{{route('modele.create')}}"><i class="fa fa-chevron-right"></i> Ajouter un modéle</a></li>
                 </ul>
             </li>
             <li class="treeview">

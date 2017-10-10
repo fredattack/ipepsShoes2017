@@ -9,7 +9,6 @@
 @endsection
 
 @section('nav')
-
 @endsection
 
 @section('asideLeft')
@@ -19,7 +18,6 @@
 @section('asideRight')
     <section class="content-header">
         <h1>
-
             {{--Dashboard--}}
             {{--<small>Control panel</small>--}}
             Tableau de Bord
@@ -28,11 +26,14 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Admin</li>
+            <li >Modele</li>
+            <li class="active">index</li>
         </ol>
     </section>
+    <div class="row">
 
-    @include('admin.nav.smallBoxes',['countModel'=>$countModel])
+    </div>
+
 @endsection
 @section('section')
 
