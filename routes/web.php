@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /*
 |--------------------------------------------------------------------------
-| admin Routes
+| adminPanel Routes
 |--------------------------------------------------------------------------
 |
 |
@@ -41,7 +41,7 @@ Route::resource('reduction', 'reductionController');
 Route::resource('type', 'TypeController');
 Route::resource('shipment', 'shipmentController');
 Route::resource('adress', 'AdressController');
-    Route::get('/', function () {
-        return view('admin.adminHome');
-    });
+
 });
+
+Route::get('/admin', 'AdminController@index')->name('admin');

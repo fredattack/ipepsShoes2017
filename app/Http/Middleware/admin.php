@@ -17,10 +17,11 @@ class admin
     public function handle($request, Closure $next)
     {
 
-        $userId = \Auth::id(); //todo finish admin middelware
+        $userId = \Auth::id(); //todo finish adminPanel middelware
         $user= User::find($userId);
-        if($user->role != 'admin'){
+        if($user->role != 'adminPanel'){
             return 'Vous n\'avez pas les droits d\'acces nécessaire.';
+
         }
         return $next($request);
     }
