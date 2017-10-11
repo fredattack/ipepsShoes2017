@@ -4,3 +4,21 @@
     height: 35em;
     padding: 6em 3em;
 }
+.productBoxAdmin{
+    height:18em;
+}
+
+.productImageAdmin{
+    max-height: 100%;
+    max-width: 100%;
+    margin-top: 3em;
+}
+
+.productGenderTitleAdmin{
+    margin-left: 2em;
+}
+
+.productInfoAdmin{
+    margin-top: 3em;
+    font-size: larger;
+}

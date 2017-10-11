@@ -1303,7 +1303,7 @@ body > .header .logo .icon {
   border-bottom-left-radius: 0;
   border-bottom: 0px solid #f4f4f4;
   color: #444;
-  padding-bottom: 10px;
+  /*! padding-bottom: 10px; */
 }
 .box .box-header:before,
 .box .box-header:after {
@@ -1332,7 +1332,7 @@ body > .header .logo .icon {
   padding: 5px 10px 5px 5px;
 }
 .box .box-body {
-  padding: 10px;
+  padding: 0em 1em calc;
   -webkit-border-top-left-radius: 0;
   -webkit-border-top-right-radius: 0;
   -webkit-border-bottom-right-radius: 3px;

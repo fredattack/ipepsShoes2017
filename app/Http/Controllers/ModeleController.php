@@ -15,11 +15,11 @@ class ModeleController extends Controller
   public function index()
   {
     $modeleList= \App\Modele::orderBy('idGender')->get();
-    $genderList =\App\Gender::orderBy('id')->pluck('name', 'id');
+    $genderList =\App\Gender::orderBy('id')->get();
 
       return view('admin.modele.index',compact(['modeleList','genderList']));
 
-    dd($modeleList);
+//    dd($modeleList);
   }
 
   /**
@@ -53,12 +53,23 @@ class ModeleController extends Controller
       ]);
 
       $model = $request->all();
-      $nom= $request->file('image')->getClientOriginalName();
+
+      if($request->file('image')==null){
+
+          $nom="no-image.jpg";
+      }
+      else{
+          $nom= $request->file('image')->getClientOriginalName();
+          $file = $request->file('image');
+          $destinationPath = 'image';
+          $file->move($destinationPath,$nom);
+      }
       $model['image']=$nom;
       $model['idReduction']=1;
 //      dd($model);
       \App\Modele::create($model);
-      return 'ok on y est';
+      return redirect('admin/modele');
+//          ->withOk("Le Plat " . $request->input('name') . " a été modifié.");
   }
 
   /**

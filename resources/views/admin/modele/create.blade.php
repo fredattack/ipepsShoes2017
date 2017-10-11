@@ -1,5 +1,5 @@
 @extends('layouts.AdminLayout')
-
+{{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--}}
 @section('title')
 
 @endsection
@@ -55,11 +55,12 @@
                     {!! $errors->first('idBrand', '<small class="help-block">:message</small>') !!}
 
                 </div>
-                {!! Form::label('image', 'Image:',null, ['class' => 'form-control']) !!}
+                {!! Form::label('image', 'Image:',null, ['class' => 'form-control' ]) !!}
                 <div class="form-group {!! $errors->has('image') ? 'has-error' : '' !!}">
-                    {!! Form::file('image') !!}
+                    {!! Form::file('image',['class' => 'form-control','onchange'=>"readURL(this)" ]) !!}
                     {!! $errors->first('image', '<small class="help-block">:message</small>') !!}
                 </div>
+                <img id="img_prev" src="#" alt="your image" />
             </div>
 
             <div class="col-lg-6 col-xs-12">
@@ -91,7 +92,22 @@
 
 @endsection
 @section('section')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('#img_prev')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
 @endsection
 

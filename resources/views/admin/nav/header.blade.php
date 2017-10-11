@@ -208,15 +208,15 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>{{ Auth::user()->firstName}} <i class="caret"></i></span>
+                                {{--<span>{{ Auth::user()->firstName}} <i class="caret"></i></span>--}}
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-black">
                                     {{--<img src="img/avatar3.png" class="img-circle" alt="User Image" />--}}
                                     <h4>
-                                        {{ Auth::user()->firstName}} {{ Auth::user()->surname}}
-                                        <h5>{{ Auth::user()->role}}</h5>
+                                        {{--{{ Auth::user()->firstName}} {{ Auth::user()->surname}}--}}
+                                        {{--<h5>{{ Auth::user()->role}}</h5>--}}
                                         {{--<small>Member since Nov. 2012</small>--}}
                                     </h4>
                                 </li>
