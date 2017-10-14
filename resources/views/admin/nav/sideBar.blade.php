@@ -55,7 +55,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('order.index')}}">
                     <i class="fa fa-shopping-cart"></i> <span>Ventes</span>
                     <small class="badge pull-right bg-red">3</small>
                 </a>

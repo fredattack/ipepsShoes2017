@@ -30,15 +30,15 @@
             <li class="active">Commande</li>
         </ol>
     </section>
-
+<div class="container">
     <div class="row">
-        <title>Nouvelles Commandes</title>
+        <h1>Nouvelles Commandes</h1>
     </div>
 
     <div class="row">
-        <title>Commandes expédiées</title>
+        <h1>Commandes expédiées</h1>
     </div>
-
+</div>
 @endsection
 @section('section')
 
