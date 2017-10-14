@@ -1,6 +1,7 @@
 <?php 
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 class BrandController extends Controller 
 {
@@ -30,9 +31,32 @@ class BrandController extends Controller
    *
    * @return Response
    */
-  public function store()
+  public function store(Request $request)
   {
-    
+      $this->validate($request, [
+          'name' => 'bail|unique:types|max:100',
+      ]);
+
+      $brand=$request->all();
+//      dd($request);
+
+
+      if($request->file('logo')==null){
+dd('pas top');
+          $nom="no-image.jpg";
+      }
+      else{
+          $nom= $request->file('logo')->getClientOriginalName();
+          $file = $request->file('logo');
+          $destinationPath = 'image';
+//          dd($file);
+          $file->move($destinationPath,$nom);
+      }
+      $brand['logo']=$nom;
+      \App\Brand::create($brand);
+
+      return redirect('admin/settings/product');
+
   }
 
   /**

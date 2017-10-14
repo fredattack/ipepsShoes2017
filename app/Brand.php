@@ -12,7 +12,7 @@ class Brand extends Model
     protected $fillable = array('name', 'logo');
     protected $visible = array('name', 'logo');
 
-    public function Brand_models()
+    public function modele()
     {
         return $this->hasMany('Modele');
     }

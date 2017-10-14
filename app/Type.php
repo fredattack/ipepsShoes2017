@@ -12,7 +12,7 @@ class Type extends Model
     protected $fillable = array('name');
     protected $visible = array('name');
 
-    public function types_Models()
+    public function modele()
     {
         return $this->hasMany('Modele');
     }

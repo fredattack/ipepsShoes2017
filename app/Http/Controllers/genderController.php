@@ -1,6 +1,7 @@
 <?php 
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 class genderController extends Controller 
 {
@@ -30,9 +31,16 @@ class genderController extends Controller
    *
    * @return Response
    */
-  public function store()
+  public function store(Request $request)
   {
-    
+      $this->validate($request, [
+          'name' => 'bail|unique:types|max:100',
+      ]);
+
+      $gender=$request->all();
+
+      \App\Gender::create($gender);
+      return redirect('admin/settings/product');
   }
 
   /**

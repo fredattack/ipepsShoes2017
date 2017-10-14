@@ -27,18 +27,16 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li >Modele</li>
-            <li class="active">index</li>
+            <li class="active">Homme</li>
         </ol>
     </section>
- @include('admin.nav.modeleMenu')
+    @include('admin.nav.modeleMenu')
     <div class="row">
-    @foreach($genderList as $gender)
 
         <div class="col-lg-12">
-            <h1 class="productGenderTitleAdmin">{{$gender->name}} </h1>
 
             @foreach($modeleList as $modele)
-                @if($modele->idGender == $gender->id)
+
                     <div class="col-lg-4 col-xs-12">
                     <div class="box box-primary productBoxAdmin">
                         <div class="box-header" data-toggle="tooltip" title="Header tooltip">
@@ -72,27 +70,29 @@
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                            <div class="col-lg-12 selectReduction">
-                                <div class="col-lg-3 ">
-                                    {!! Form::open(['method' => 'put', 'route' => ['modele.update', $modele->id,]]) !!}
-                                        {!! Form::label('reduction', 'Promo:',null, ['class' => 'form-control ']) !!}
-                                        <div class="form-group ">
-                                        {{ Form::select('idReduction', $reductionList,$modele->idReduction,['class'=>'form-control selectReduction ','onchange'=>'upDateReduction(this,'.$modele->id.')']) }}
-                                    {!! Form::close() !!}
-                                </div>
-                                </div>
-
-                                <div class="col-lg-9">
-                                    <h3 class="pull-right">{{$modele->price}}€</h3>
-                                </div>
+                            <div class="col-lg-12">
+                            <div class="col-lg-4">
+                            @if($modele->reduction->value != 0 )
+                                    @php($prix =$modele->price-$prix =$modele->price * $modele->reduction->value/100 )
+                                        @php($prix=$prix.' €')
+                                    <p class="productReductionAdmin"><p class="badgeReduction  bg-green">-{{$modele->reduction->value}}%</p></p>
+                                @else
+                                    @php($prix='')
+                                @endif
+                            </div>
+                                {{--<div class="col-lg-4">--}}
+                                {{--<small class="badgePrixReduce  bg-red">{{$prix}}</small>--}}
+                            {{--</div>--}}
+                            <div class="col-lg-8">
+                                <h3 class="pull-right">{{$modele->price}}€</h3>
+                            </div>
                             </div>
                         </div><!-- /.box-footer-->
                     </div><!-- /.box -->
                     </div>
-                @endif
+
             @endforeach
         </div>
-        @endforeach
     </div>
 
 @endsection

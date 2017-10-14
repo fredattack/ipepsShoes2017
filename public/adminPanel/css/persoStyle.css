@@ -1,11 +1,32 @@
 .formPerso{
+    margin:4em;
+}
+.createFormModele{
     margin: auto;
+    margin-top: 2em;
     width: 70%;
-    height: 35em;
+    /*height: auto;*/
     padding: 6em 3em;
 }
+.editFormModele{
+    margin: auto;
+    width: 70%;
+    height: auto;
+    padding: 0em 3em;
+}
+
+.productImageEdit{
+    max-height: 100%;
+    max-width: 100%;
+    margin: 1em 0em;
+}
+
 .productBoxAdmin{
-    height:18em;
+    margin-top: 1em;
+    height:22em;
+}
+
+.selectReduction{
 }
 
 .productImageAdmin{
@@ -14,11 +35,55 @@
     margin-top: 3em;
 }
 
+.brandImageAdmin{
+    max-height: 50%;
+    max-width: 50%;
+    /*margin-top: 0em;*/
+}
+
 .productGenderTitleAdmin{
     margin-left: 2em;
 }
 
 .productInfoAdmin{
     margin-top: 3em;
-    font-size: larger;
+    /*font-size: larger;*/
+}
+
+.btnProductAdmin{
+    margin: 1em;
+ }
+.productReductionAdmin{
+    margin-top: 1em;
+
+}
+
+.badgeReduction {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #999;
+    border-radius: 10px;
+}
+
+.badgePrixReduce {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #999;
+    border-radius: 10px;
 }

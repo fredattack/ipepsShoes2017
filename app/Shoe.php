@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Shoe extends Model 
@@ -9,17 +8,14 @@ class Shoe extends Model
 
     protected $table = 'shoes';
     public $timestamps = true;
-    protected $fillable = array('reduction', 'IdModel', 'idReduction');
-    protected $visible = array('reduction', 'IdModel', 'idReduction');
+    protected $fillable = array( 'size','quantity','idModele', 'idReduction');
+    protected $visible = array( 'size','quantity','idModele', 'idReduction');
 
-    public function shoeReduction()
-    {
-        return $this->belongsTo('Reduction', 'idReduction');
-    }
 
-    public function ShoeModel()
+
+    public function modele()
     {
-        return $this->belongsTo('Modele', 'IdModel');
+        return $this->belongsTo(Modele::class, 'idModele','id');
     }
 
 }
