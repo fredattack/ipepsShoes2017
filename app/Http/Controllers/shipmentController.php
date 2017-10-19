@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-class shipmentController extends Controller 
+use App\Shipment;
+use Symfony\Component\HttpFoundation\Request;
+
+class shipmentController extends Controller
 {
 
   /**
@@ -12,6 +15,11 @@ class shipmentController extends Controller
    */
   public function index()
   {
+
+      $newShipmentList=\App\Order::with(array('user'))->where('orderReady',1)->where('delivered','=',0)->orderBy('delivered','desc')->get();
+      $shipmentReadyList=\App\Order::with(array('user'))->where('delivered',1)->orderBy('delivered','desc')->get();
+//      dd($newOrderList);
+      return view('admin.shipment.index',compact('newShipmentList','shipmentReadyList'));
     
   }
 
@@ -43,6 +51,11 @@ class shipmentController extends Controller
    */
   public function show($id)
   {
+
+      $order = \App\Order::with(array('user','shipment','orderLine'))->findOrFail($id);
+      $orderLineList=\App\OrderLine::with(array('shoe'))->where('idOrder',$id)->get();
+//        dd($orderLineList);
+      return view('admin.shipment.show',compact(['order','orderLineList']));
     
   }
 
@@ -52,9 +65,24 @@ class shipmentController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function edit($id)
+  public function edit(Request $request,$id)
   {
-    
+      $order = \App\Order::findOrFail($id);
+      $order->delivered = 1;
+
+      //  create shipment
+      $shipment = new Shipment();
+      $shipment->trackingNr=$request->trackingNr;
+      $shipment->idAdress = $order->user->idShipAdress1;
+      $shipment->save();
+        // get idShipment + update order
+      $order->idShipment = $shipment->id;
+      $order->save();
+
+      $newShipmentList=\App\Order::with(array('user'))->where('delivered',0)->orderBy('delivered','desc')->get();
+      $shipmentReadyList=\App\Order::with(array('user'))->where('delivered',1)->orderBy('delivered','desc')->get();
+
+      return view('admin.shipment.index',compact('newShipmentList','shipmentReadyList'));
   }
 
   /**

@@ -12,7 +12,12 @@ class reductionController extends Controller
    */
   public function index()
   {
-    
+      $modeleList= \App\Modele::with(array('type','brand'))->where('idReduction','!=',1)->orderBy('idGender')->get();
+      $genderList =\App\Gender::orderBy('id')->get();
+      $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
+
+
+      return view('admin.promos.index',compact(['modeleList','genderList','reductionList']));
   }
 
   /**

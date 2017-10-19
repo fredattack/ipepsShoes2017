@@ -1,4 +1,8 @@
-    <!-- sidebar: style can be found in sidebar.less -->
+<?php
+$badge=[];
+$badge=\App\Http\Controllers\AdminController::badgeGenerator()
+?>
+<!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
 
@@ -15,7 +19,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="active">
-                <a href="index.html">
+                <a href="{{route('admin')}}">
                     <i class="fa fa-dashboard"></i> <span>Tableau de bord</span>
 
                 </a>
@@ -24,6 +28,8 @@
                 <a href="#">
                     <i class="fa fa-th"></i>
                     <span>Modéles</span>
+                    <small class="badge pull-right bg-green">{{$badge['modele']}}</small>
+
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -45,6 +51,15 @@
                     <li><a href="{{route('modele.create')}}"><i class="fa fa-chevron-right"></i> Ajouter un modéle</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="{{route('reduction.index')}}">
+                    <i class="fa fa-user"></i><span>Promos</span>
+                    <small class="badge pull-right bg-green">{{$badge['promo']}}</small>
+
+                    {{--todo faire la page Promo (liste, remove all, --}}
+
+                </a>
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-cogs"></i> <span>Boite à outils</span>
@@ -55,24 +70,27 @@
                 </ul>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-shopping-cart"></i> <span>Ventes</span>
-                    <small class="badge pull-right bg-red">3</small>
+                <a href="{{route('order.index')}}">
+                    <i class="fa fa-shopping-cart"></i> <span>Commandes</span>
+                    <small class="badge pull-right bg-red">{{$badge['newOrder']}}</small>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('shipment.index')}}">
                     <i class="fa fa-truck"></i> <span>Livraison</span>
-                    <small class="badge pull-right bg-yellow">12</small>
+                        <small class="badge pull-right bg-red">{{$badge['newShipment']}}</small>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{route('user.index')}}">
                     <i class="fa fa-user"></i>
                     <span>Utilisateur</span>
+                    <small class="badge pull-right bg-yellow">{{$badge['user']}}</small>
                 </a>
             </li>
+
+
         </ul>
     </section>
     <!-- /.sidebar -->

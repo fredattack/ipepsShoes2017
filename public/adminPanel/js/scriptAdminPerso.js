@@ -13,6 +13,7 @@ function upDateReduction(idreduction,idModele){
         {
             alert('Mise à jour de la promo');
             console.log('upDateReduction ok id:' + response );
+            location.reload();
 
         },
         error: function (xhr, b, c) {

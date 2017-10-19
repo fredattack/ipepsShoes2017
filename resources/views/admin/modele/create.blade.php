@@ -84,11 +84,13 @@
                     </div>
 
                     {!! Form::label('price', 'Prix:',null, ['class' => 'form-control']) !!}
-                    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+
+                        <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
                         {!! Form::text('price',null, ['class' => 'form-control', 'placeholder' => 'Prix']) !!}
                         {!! $errors->first('price', '<small class="help-block">:message</small>') !!}
                     </div>
-                    {!! Form::label('type', 'Type:',null, ['class' => 'form-control']) !!}
+
+                        {!! Form::label('type', 'Type:',null, ['class' => 'form-control']) !!}
                     <div class="form-group {!! $errors->has('idType') ? 'has-error' : '' !!}">
                         {{ Form::select('idType',$typeList,
                                         null,['class'=>'form-control','placeholder'=>'Type de chaussure']) }}

@@ -9,10 +9,12 @@ class Shipment extends Model
 
     protected $table = 'shipments';
     public $timestamps = true;
+    protected $fillable = array('idAdress','trackingNr');
+    protected $visible = array('idAdress','trackingNr');
 
-    public function order()
+    public function adress()
     {
-        return $this->hasOne('Order', 'idOrder');
+        return $this->hasOne(Adress::class,'id','idAdress');
     }
 
 }

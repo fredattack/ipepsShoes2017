@@ -16,16 +16,7 @@ class shoeController extends Controller
    */
   public function index()
   {
-//      $shoesList=DB::table('shoes')
-//          ->join('modeles', 'shoes.idModele', '=', 'modeles.id')
-//          ->join('brands','modeles.idBrand','=','brands.id')
-//          ->join('genders','modeles.idGender','=','genders.id')
-//          ->join('types','modeles.idType','=','types.id')
-//          ->join('reductions','modeles.idReduction','=','reductions.id')
-//          ->select('shoes.*','modeles.color','modeles.image','modeles.name', 'modeles.price',
-//              'brands.name as brand','brands.logo as logoBrand','genders.name as gender','types.name as type','reductions.value as promo')
-//          ->orderBy('modeles.name')
-//          ->get();
+//
 
 
       $shoesList= \App\Shoe::with('modele')->orderBy('idModele')->get();

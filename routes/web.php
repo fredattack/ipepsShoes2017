@@ -30,8 +30,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix'=>'admin'],function (){
 
-Route::resource('shoe', 'shoeController');
-Route::resource('modele', 'ModeleController');
+    Route::resource('shoe', 'shoeController');
+    Route::resource('modele', 'ModeleController');
     Route::resource('size', 'sizeController');
     Route::resource('gender', 'genderController');
     Route::resource('brand', 'BrandController');
@@ -42,7 +42,6 @@ Route::resource('modele', 'ModeleController');
     Route::resource('type', 'TypeController');
     Route::resource('shipment', 'shipmentController');
     Route::resource('adress', 'AdressController');
-    Route::get('/', 'AdminController@index')->name('admin');
     Route::get('settings/product', 'AdminController@settingsProduct')->name('settingsProduct');
     Route::get('/stock/{shoe}', 'shoeController@stock')->name('stock');
     Route::post('/stockUpdate', 'shoeController@stockUpdate')->name('stockUpdate');
@@ -51,5 +50,6 @@ Route::resource('modele', 'ModeleController');
     Route::get('Femme', 'ModeleController@indexFemme')->name('indexFemme');
     Route::get('upDateReduction',['uses'=>'ModeleController@upDateReduction', 'as'=>'upDateReduction']);
 
+    Route::get('/', 'AdminController@index')->name('admin');
 
 });

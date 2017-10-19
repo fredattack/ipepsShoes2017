@@ -12,7 +12,10 @@ class OrderController extends Controller
    */
   public function index()
   {
-    
+      $newOrderList=\App\Order::with(array('user'))->where('OrderReady',0)->orderBy('delivered','desc')->get();
+      $orderReadyList=\App\Order::with(array('user'))->where('OrderReady',1)->orderBy('delivered','desc')->get();
+//      dd($newOrderList);
+    return view('admin.order.index',compact('newOrderList','orderReadyList'));
   }
 
   /**
@@ -43,7 +46,10 @@ class OrderController extends Controller
    */
   public function show($id)
   {
-    
+      $order = \App\Order::with(array('user','shipment','orderLine'))->findOrFail($id);
+      $orderLineList=\App\OrderLine::with(array('shoe'))->where('idOrder',$id)->get();
+//        dd($orderLineList);
+        return view('admin.order.show',compact(['order','orderLineList']));
   }
 
   /**
@@ -54,7 +60,22 @@ class OrderController extends Controller
    */
   public function edit($id)
   {
-    
+      $order = \App\Order::findOrFail($id);
+      if($order->orderReady==0)
+      {
+          $order->orderReady=1 ;
+      }
+      else
+      {
+          $order->delivered = 1;
+      }
+
+      $order->save();
+      $newOrderList=\App\Order::with(array('user'))->where('OrderReady',0)->orderBy('id')->get();
+      $orderReadyList=\App\Order::with(array('user'))->where('OrderReady',1)->orderBy('id')->get();
+//      dd($newOrderList);
+
+      return view('admin.order.index',compact('newOrderList','orderReadyList'));
   }
 
   /**

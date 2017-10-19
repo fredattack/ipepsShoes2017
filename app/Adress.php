@@ -12,4 +12,8 @@ class Adress extends Model
     protected $fillable = array('idUser', 'type', 'street', 'number', 'postCode', 'city', 'country', 'deliveryCost');
     protected $visible = array('idUser', 'type', 'street', 'number', 'postCode', 'city', 'country', 'deliveryCost');
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idUser','id');
+    }
 }

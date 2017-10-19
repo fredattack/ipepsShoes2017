@@ -12,6 +12,10 @@ class UserController extends Controller
    */
   public function index()
   {
+      $userList=\App\User::with(array('adress','order'))->get();
+
+      dd($userList);
+//      return view('admin.user.index',compact('userList'));
     
   }
 

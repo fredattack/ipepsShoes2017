@@ -7,14 +7,14 @@
                 <h3>
                     {{$countModel}}
                 </h3>
-                <p>
+                <h1>
                     Produits
-                </p>
+                </h1>
             </div>
             <div class="icon">
                 <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{route('modele.index')}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -24,16 +24,16 @@
         <div class="small-box bg-green">
             <div class="inner">
                 <h3>
-                    3<sup style="font-size: 20px">%</sup>
+                    {{$countOrder}}
                 </h3>
-                <p>
+                <h1>
                     Ventes
-                </p>
+                </h1>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{route('order.index')}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -44,16 +44,16 @@
         <div class="small-box bg-red">
             <div class="inner">
                 <h3>
-                    12
+                    {{$countShipment}}
                 </h3>
-                <p>
+                <h1>
                     Livraison
-                </p>
+                </h1>
             </div>
             <div class="icon">
                 <i class="ion ion-ios7-box"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{route('shipment.index')}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -63,16 +63,16 @@
         <div class="small-box bg-yellow">
             <div class="inner">
                 <h3>
-                    44
+                    {{$countUser}}
                 </h3>
-                <p>
-                    Utilisateurs
-                </p>
+                <h1>
+                    Clients
+                </h1>
             </div>
             <div class="icon">
                 <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{route('user.index')}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>

@@ -37,60 +37,68 @@
 
             @foreach($modeleList as $modele)
 
-                    <div class="col-lg-4 col-xs-12">
-                    <div class="box box-primary productBoxAdmin">
-                        <div class="box-header" data-toggle="tooltip" title="Header tooltip">
+                <div class="col-lg-4 col-xs-12" >
+                    <div class="box box-primary" style="padding: 1em 2em">
+
+                        <div class="box-header" data-toggle="tooltip" title="Header tooltip"  >
                             <div class="col-lg-6 col-xs-12">
                                 <h3 class="box-title">{{$modele->name}}</h3>
                             </div>
                             <div class="col-lg-2 col-xs-6">
                                 {!! Form::open(['method' => 'GET', 'route' => ['modele.edit', $modele->id]]) !!}
-                                {!! Form::submit('Modifier', [ 'class' => 'btn btn-primary btn-xs btnProductAdmin', 'onclick' => '']) !!}
+                                {!! Form::submit('Modifier', [ 'class' => 'btn btn-primary  btnProductAdmin', 'onclick' => '']) !!}
                                 {!! Form::close() !!}
                             </div>
                             <div class="col-lg-3 col-xs-6 ">
                                 {!! Form::open(['method' => 'DELETE', 'route' => ['modele.destroy', $modele->id]]) !!}
-                                {!! Form::submit('Supprimer', ['class' => 'btn btn-danger btn-xs btnProductAdmin', 'onclick' => 'return confirm(\'Voulez vous vraiment supprimer ce modèle ?\')'])  !!}
+                                {!! Form::submit('Supprimer', ['class' => 'btn btn-danger btnProductAdmin', 'onclick' => 'return confirm(\'Voulez vous vraiment supprimer ce modèle ?\')'])  !!}
                                 {!! Form::close() !!}
                             </div>
                         </div>
+
                         <div class="box-body">
-                            <div class="col-lg-5 col-xs-5 ">
-                                <img class="productImageAdmin" src='/image/{{$modele->image}}' >
+                            <div class="row">
+                                <div class="col-lg-5 col-xs-5 ">
+                                    <img class="productImageAdmin" src='/image/{{$modele->image}}' >
+                                </div>
+                                <div class="col-lg-7 col-xs-7 productInfoAdmin">
+                                    <p><small>Type: </small><b>{{$modele->type->name}}</b></p>
+                                    <p><small>Couleur: </small><b>{{$modele->color}}</b></p>
+                                    <p><small>Marque: </small><b>{{$modele->brand->name}}</b></p>
+                                    {!! Form::open(['method' => 'GET', 'route' => ['stock', $modele->id]]) !!}
+                                    {!! Form::submit('stock', ['class' => 'btn btn-warning ' ])  !!}
+                                    {!! Form::close() !!}
+                                </div>
                             </div>
-                            <div class="col-lg-7 col-xs--7 productInfoAdmin">
-                                <p><small>Type: </small><b>{{$modele->type->name}}</b></p>
-                                <p><small>Couleur: </small><b>{{$modele->color}}</b></p>
-                                <p><small>Marque: </small><b>{{$modele->brand->name}}</b></p>
-
-                                {!! Form::open(['method' => 'GET', 'route' => ['stock', $modele->id]]) !!}
-                                {!! Form::submit('stock', ['class' => 'btn btn-warning ' ])  !!}
-                                {!! Form::close() !!}
-
-                            </div>
-                        </div><!-- /.box-body -->
+                        </div><!-- en body-->
                         <div class="box-footer">
-                            <div class="col-lg-12">
-                            <div class="col-lg-4">
-                            @if($modele->reduction->value != 0 )
-                                    @php($prix =$modele->price-$prix =$modele->price * $modele->reduction->value/100 )
-                                        @php($prix=$prix.' €')
-                                    <p class="productReductionAdmin"><p class="badgeReduction  bg-green">-{{$modele->reduction->value}}%</p></p>
-                                @else
-                                    @php($prix='')
-                                @endif
-                            </div>
-                                {{--<div class="col-lg-4">--}}
-                                {{--<small class="badgePrixReduce  bg-red">{{$prix}}</small>--}}
-                            {{--</div>--}}
-                            <div class="col-lg-8">
-                                <h3 class="pull-right">{{$modele->price}}€</h3>
-                            </div>
-                            </div>
-                        </div><!-- /.box-footer-->
-                    </div><!-- /.box -->
-                    </div>
+                            <div class="row">
+                                <div class="col-lg-3 ">
+                                    {!! Form::open(['method' => 'put', 'route' => ['modele.update', $modele->id,]]) !!}
+                                    {!! Form::label('reduction', 'Promo:',null, ['class' => 'form-control ']) !!}
+                                    <div class="form-group ">
+                                        {{ Form::select('idReduction', $reductionList,$modele->idReduction,['class'=>'form-control selectReduction ','onchange'=>'upDateReduction(this,'.$modele->id.')']) }}
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    @if($modele->idReduction!=1)
+                                        <p class="badge  pagination-centered bg-red badgeReduction ">-{{$modele->reduction->value}}%</p>
+                                    @endif
+                                </div>
+                                <div class="col-lg-3 pull-right newPrice"><h1>{{number_format ($modele->price-$modele->price*$modele->reduction->value/100,2)}}€</h1></div>
 
+                                <div class="col-lg-3">
+                                    @if($modele->idReduction!=1)
+                                        <h3 class="pull-right reducePrice" >{{$modele->price}}€</h3>
+                                    @endif
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </div>
     </div>

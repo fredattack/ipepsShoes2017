@@ -23,7 +23,7 @@ class Modele extends Model
 
     public function shoes()
     {
-        return $this->hasMany('Shoe','idModele');
+        return $this->hasMany('Shoe','idModele','id');
     }
 
     public function type()

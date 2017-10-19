@@ -11,8 +11,8 @@ class User extends Authenticatable
 	use Notifiable;
     protected $table = 'users';
     public $timestamps = true;
-    protected $fillable = array('firstName', 'surname', 'login', 'email','password', 'role');
-    protected $visible = array('firstName', 'surname', 'login', 'email', 'role');
+    protected $fillable = array('firstName', 'lastName', 'login', 'email','password', 'role','idFactAdress','idShipAdress1','idShipAdress2');
+    protected $visible = array('firstName', 'lastName', 'login', 'email','password', 'role','idFactAdress','idShipAdress1','idShipAdress2');
 
 	protected $hidden = [
         'password', 'remember_token',
@@ -20,12 +20,12 @@ class User extends Authenticatable
 	
     public function order()
     {
-        return $this->hasMany('Order');
+        return $this->hasMany(Order::class,'idUser','id');
     }
 
     public function adress()
     {
-        return $this->hasMany('Adress');
+        return $this->hasMany(adress::class,'idUser','id');
     }
 
 }

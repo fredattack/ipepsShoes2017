@@ -27,9 +27,10 @@ class ModeleController extends Controller
     {
         $modeleList= \App\Modele::with(array('type','brand'))->where('idGender',2)->orderBy('idGender')->get();
         $genderList =\App\Gender::orderBy('id')->get();
+        $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
 
-//        dd($modeleList);
-        return view('admin.modele.indexEnfant',compact(['modeleList','genderList']));
+
+        return view('admin.modele.indexEnfant',compact(['modeleList','genderList','reductionList']));
 
     }
 
@@ -37,17 +38,21 @@ class ModeleController extends Controller
     {
         $modeleList= \App\Modele::where('idGender',1)->with(array('type','brand'))->orderBy('idGender')->get();
         $genderList =\App\Gender::orderBy('id')->get();
+        $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
 
-//    dd($modeleList);
-        return view('admin.modele.indexFemme',compact(['modeleList','genderList']));
+
+        return view('admin.modele.indexFemme',compact(['modeleList','genderList','reductionList']));
 
     }
 
     public function indexHomme()
     {
         $modeleList= \App\Modele::where('idGender',3)->with(array('type','brand'))->orderBy('idGender')->get();
+        $genderList =\App\Gender::orderBy('id')->get();
+        $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
 
-        return view('admin.modele.indexHomme',compact(['modeleList','genderList']));
+
+        return view('admin.modele.indexHomme',compact(['modeleList','genderList','reductionList']));
 
     }
   /**

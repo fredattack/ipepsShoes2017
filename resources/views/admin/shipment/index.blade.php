@@ -25,15 +25,17 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Admin</li>
-            <li class="active">Commande</li>
+            <li>Admin</li>
+            <li>Commande</li>
+            <li class="active">Livraison</li>
+
         </ol>
     </section>
     <br>
 <div class="container">
 {{----------------------------------------------------------------------------------------------------------------------
 -
--------------------------------------------------New Order--------------------------------------------------------------
+-------------------------------------------------New Shipment--------------------------------------------------------------
 -
 ----------------------------------------------------------------------------------------------------------------------}}
     <div class="row">
@@ -41,7 +43,7 @@
 
             <div class="box-header" data-toggle="tooltip" title="Header tooltip" >
                 <div class="col-lg-3 col-xs-12" >
-                    <p class="box-title">Nouvelles Commandes</p>
+                    <p class="box-title">Nouvelles Livraisons</p>
                 </div>
             </div>
             {{-- Box Body + table responsive--}}
@@ -51,49 +53,60 @@
                                         <tr>
                                             <th>N°</th>
                                             <th>User Id</th>
-                                            <th>Préparée</th>
                                             <th>Livrée</th>
-                                            <th>Total</th>
-                                            <th>Date</th>
+                                            <th>id Envoie</th>
+                                            <th>Numéro Tracking</th>
+                                            <th>Date de commande</th>
+                                            <th>Date d'Envoie</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        @foreach($newOrderList as $newOrder)
+                                        @foreach($newShipmentList as  $newShipment)
                                             <tr>
-                                                <td>{{$newOrder->id}}</td>
-                                                <td>{{$newOrder->idUser}}</td>
-                                                <td>
-                                                    @if($newOrder->orderReady== 0)
-                                                        <span class="glyphicon glyphicon-remove" style="color: red;"></span>
-                                                    @else
-                                                        <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if($newOrder->delivered == 0)
-                                                        <span class="glyphicon glyphicon-remove" style="color: red;"></span>
-                                                    @else
-                                                        <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
-                                                    @endif
-                                                </td>
-                                                <td>{{$newOrder->totalProducts}}</td>
-                                                <td>
-                                                    {{$newOrder->created_at}}
-                                                </td>
-                                                <td>
-                                                    {!! Form::open(['method' => 'GET', 'route' => ['order.edit', $newOrder->id]]) !!}
-                                                    {!! Form::submit('Préparé', [ 'class' => 'btn btn-success  btnProductAdmin', 'onclick' => '']) !!}
-                                                    {!! Form::close() !!}
-                                                </td>
-                                                <td>
-                                                    {!! Form::open(['method' => 'GET', 'route' => ['order.show', $newOrder->id]]) !!}
-                                                    {!! Form::submit('Details', ['class' => 'btn btn-warning  btnProductAdmin', 'onclick' => ''])  !!}
-                                                    {!! Form::close() !!}
-                                                </td>
+                                                <td>{{ $newShipment->id}}</td>
+                                                <td>{{ $newShipment->idUser}}</td>
 
+                                                <td>
+                                                    @if( $newShipment->delivered == 0)
+                                                        <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+                                                    @else
+                                                        <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if( $newShipment->delivered == 0)
+                                                        <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+                                                    @else
+                                                       {{$newShipment->shipment->id}}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if( $newShipment->delivered == 0)
+                                                        <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+                                                    @else
+                                                        {{$newShipment->shipment->trackingNr}}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ $newShipment->created_at}}
+                                                </td>
+                                                <td> {{ $newShipment->updated_at}}</td>
+                                                <td>
+                                                {{--{!! Form::open(['method' => 'GET', 'route' => ['shipment.edit',  $newShipment->id]]) !!}--}}
+                                                    <button type="button" class="btn btn-success btnProductAdmin" {{--id="{{$newShipment->id}}"--}} data-toggle="modal" data-target="#TrackingNrModal" onclick="PassVal({{$newShipment->id}})">Expédier
+                                                    {{--{!! Form::submit('Expédier', [ 'class' => 'btn btn-success  btnProductAdmin', 'onclick' => '']) !!}--}}
+                                                    {{--{!! Form::close() !!}--}}
+                                                </td>
+                                                <td>
+                                                {!! Form::open(['method' => 'GET', 'route' => ['shipment.show',  $newShipment->id]]) !!}
+                                                {!! Form::submit('Details', ['class' => 'btn btn-warning  btnProductAdmin', 'onclick' => ''])  !!}
+                                                {!! Form::close() !!}
+                                                    {{--todo modal add tracking number
+                                                    --}}
+                                                </td>
                                             </tr>
                                         @endforeach
 
@@ -102,10 +115,11 @@
                                         <tr>
                                             <th>N°</th>
                                             <th>User Id</th>
-                                            <th>Préparée</th>
                                             <th>Livrée</th>
-                                            <th>Total</th>
-                                            <th>Date</th>
+                                            <th>id Envoie</th>
+                                            <th>Numéro Tracking</th>
+                                            <th>Date de commande</th>
+                                            <th>Date d'Envoie</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -124,7 +138,7 @@
     </div>
 {{----------------------------------------------------------------------------------------------------------------------
 -
--------------------------------------------------Order Ready------------------------------------------------------------
+-------------------------------------------------Shipment Ready------------------------------------------------------------
 -
 ----------------------------------------------------------------------------------------------------------------------}}
     <div class="row">
@@ -132,7 +146,7 @@
 
                     <div class="box-header" data-toggle="tooltip" title="Header tooltip" >
                         <div class="col-lg-3 col-xs-12" >
-                            <p class="box-title">Commandes préparées</p>
+                            <p class="box-title">Envoies effectués</p>
                         </div>
                     </div>
 
@@ -143,43 +157,48 @@
                                                 <tr>
                                                     <th>N°</th>
                                                     <th>User Id</th>
-                                                    <th>Préparée</th>
                                                     <th>Livrée</th>
-                                                    <th>Total</th>
-                                                    <th>Date</th>
-                                                    <th></th>
+                                                    <th>id Envoie</th>
+                                                    <th>Numéro Tracking</th>
+                                                    <th>Date de commande</th>
+                                                    <th>Date d'Envoie</th>
                                                     <th></th>
                                                 </tr>
                                                 </thead>
 
                                                 <tbody>
-                                                @foreach($orderReadyList as$orderReady )
+                                                @foreach($shipmentReadyList as $shipmentReady )
                                                     <tr>
-                                                        <td>{{$orderReady->id}}</td>
-                                                        <td>{{$orderReady->idUser}}</td>
+                                                        <td>{{ $shipmentReady ->id}}</td>
+                                                        <td>{{ $shipmentReady->idUser}}</td>
+
                                                         <td>
-                                                            @if($orderReady->orderReady == 0)
+                                                            @if( $shipmentReady ->delivered == 0)
                                                                 <span class="glyphicon glyphicon-remove" style="color: red;"></span>
                                                             @else
                                                                 <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            @if($orderReady->delivered == 0)
+                                                            @if( $shipmentReady ->delivered == 0)
                                                                 <span class="glyphicon glyphicon-remove" style="color: red;"></span>
                                                             @else
-                                                                <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
+                                                                {{$shipmentReady ->shipment->id}}
                                                             @endif
                                                         </td>
-                                                        <td>{{$orderReady->totalProducts}}</td>
-                                                        <td>{{$orderReady->created_at}}</td>
                                                         <td>
-                                                            {!! Form::open(['method' => 'GET', 'route' => ['order.edit', $orderReady->id]]) !!}
-                                                            {!! Form::submit('Expédier', [ 'class' => 'btn btn-success  btnProductAdmin', 'onclick' => '']) !!}
-                                                            {!! Form::close() !!}
+                                                            @if( $shipmentReady ->delivered == 0)
+                                                                <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+                                                            @else
+                                                                {{$shipmentReady ->shipment->trackingNr}}
+                                                            @endif
                                                         </td>
                                                         <td>
-                                                            {!! Form::open(['method' => 'GET', 'route' => ['order.show', $orderReady->id]])  !!}
+                                                            {{ $shipmentReady ->created_at}}
+                                                        </td>
+                                                        <td> {{ $shipmentReady ->updated_at}}</td>
+                                                        <td>
+                                                            {!! Form::open(['method' => 'GET', 'route' => ['shipment.show',  $shipmentReady ->id]]) !!}
                                                             {!! Form::submit('Details', ['class' => 'btn btn-warning  btnProductAdmin', 'onclick' => ''])  !!}
                                                             {!! Form::close() !!}
                                                         </td>
@@ -191,7 +210,11 @@
                                                 <tr>
                                                     <th>N°</th>
                                                     <th>User Id</th>
-                                                    <th></th>
+                                                    <th>Livrée</th>
+                                                    <th>id Envoie</th>
+                                                    <th>Numéro Tracking</th>
+                                                    <th>Date de commande</th>
+                                                    <th>Date d'Envoie</th>
                                                     <th></th>
                                                 </tr>
                                                 </tfoot>
@@ -205,11 +228,14 @@
                 </div>
     </div>
 </div>
-@endsection
+    @include('admin.modal.trackingNr')
+    <script>
+        function PassVal(res)
+        {
+            $('#modalForm').attr('action', '/admin/shipment/'+res+'/edit');
+        }
 
-@section('section')
-
-
+    </script>
 @endsection
 
 @section('footer')

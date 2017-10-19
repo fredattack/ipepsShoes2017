@@ -98,12 +98,12 @@
                     });
                 </script>
         </div>
-            <a href="javascript:history.back()" class="btn btn-primary btn-flat btn-lg pull-left">
+            <a href="javascript:history.back()" class="btn btn-primary  btn-lg pull-left">
                 <span class="glyphicon glyphicon-circle-arrow-left"></span> Retour
             </a>
 
 
-            {!! Form::submit('Enregistrer', ['class' => 'btn btn-primary btn-flat btn-lg pull-right']) !!}
+            {!! Form::submit('Enregistrer', ['class' => 'btn btn-primary btn-lg pull-right']) !!}
         </div>
         {!! Form::close() !!}
         </div>
