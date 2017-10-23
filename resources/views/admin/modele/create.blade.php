@@ -68,7 +68,7 @@
                     {{--</div>--}}
                     {{--<img id="img_prev" src="#" alt="your image" />--}}
                     <label class="control-label">Select File</label>
-                    <input id="input-b5" name="input-b5[]" type="file" multiple>
+                    <input id="image" name="image" type="file" multiple>
                     <script>
                         $(document).on('ready', function() {
                             $("#input-b5").fileinput({showCaption: false});

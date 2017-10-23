@@ -40,7 +40,7 @@
                     <h3 class="box-title">Liste des Chaussures</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
-                    <table id="example2" class="table table-bordered table-hover">
+                    <table id="myTable" class="table table-bordered table-hover">
                         <thead>
                         <tr>
                             <th>Modéle</th>

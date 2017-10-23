@@ -23,6 +23,48 @@ class ModeleController extends Controller
       return view('admin.modele.index',compact(['modeleList','genderList','reductionList']));
 
   }
+    public function shopIndex()
+    {
+        $modeleList= \App\Modele::with(array('type','brand'))->orderBy('idGender')->get();
+        $genderList =\App\Gender::orderBy('id')->get();
+        $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
+
+
+        return view('shop.index',compact(['modeleList','genderList','reductionList']));
+
+    }
+
+    public function shopIndexHomme()
+    {
+        $modeleList= \App\Modele::with(array('type','brand'))->where('idGender',3)->orderBy('idGender')->get();
+        $genderList =\App\Gender::where('id',3)->orderBy('id')->get();
+        $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
+
+
+        return view('shop.index',compact(['modeleList','genderList','reductionList']));
+
+    }
+    public function shopIndexFemme()
+    {
+        $modeleList= \App\Modele::with(array('type','brand'))->where('idGender',1)->orderBy('idGender')->get();
+        $genderList =\App\Gender::where('id',1)->orderBy('id')->get();
+
+        $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
+
+
+        return view('shop.index',compact(['modeleList','genderList','reductionList']));
+
+    }
+    public function shopIndexEnfant()
+    {
+        $modeleList= \App\Modele::with(array('type','brand'))->where('idGender',2)->orderBy('idGender')->get();
+        $genderList =\App\Gender::where('id',2)->orderBy('id')->get();
+        $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
+
+
+        return view('shop.index',compact(['modeleList','genderList','reductionList']));
+
+    }
     public function indexEnfant()
     {
         $modeleList= \App\Modele::with(array('type','brand'))->where('idGender',2)->orderBy('idGender')->get();

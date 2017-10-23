@@ -20,6 +20,13 @@ class reductionController extends Controller
       return view('admin.promos.index',compact(['modeleList','genderList','reductionList']));
   }
 
+  static function indexPromo()
+  {
+      $modeleList= \App\Modele::with(array('type','brand'))->where('idReduction','!=',1)->inRandomOrder()->get();
+//      dd($modeleList);
+      return $modeleList;
+  }
+
   /**
    * Show the form for creating a new resource.
    *

@@ -12,13 +12,18 @@ use App\Http\Middleware\admin;
 |
 */
 
-Route::get('/', function () {
+Route::get('/laravel', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'ModeleController@shopIndex')->name('shop');
+Route::get('/shop/femme', 'ModeleController@shopIndexFemme')->name('shopFemme');
+Route::get('/shop/enfant', 'ModeleController@shopIndexEnfant')->name('shopEnfant');
+Route::get('/shop/homme', 'ModeleController@shopIndexHomme')->name('shopHomme');
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +33,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 |
 */
 
-Route::group(['prefix'=>'admin'],function (){
+Route::group(['prefix'=>'admin','middleware' => 'admin'],function (){
 
     Route::resource('shoe', 'shoeController');
     Route::resource('modele', 'ModeleController');
@@ -49,7 +54,7 @@ Route::group(['prefix'=>'admin'],function (){
     Route::get('Homme', 'ModeleController@indexHomme')->name('indexHomme');
     Route::get('Femme', 'ModeleController@indexFemme')->name('indexFemme');
     Route::get('upDateReduction',['uses'=>'ModeleController@upDateReduction', 'as'=>'upDateReduction']);
-
+    Route::get('upDateRole',['uses'=>'UserController@upDateRole', 'as'=>'upDateRole']);
     Route::get('/', 'AdminController@index')->name('admin');
 
 });

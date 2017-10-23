@@ -26,113 +26,135 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Admin</li>
+            <li>Admin</li>
+            <li class="active">User</li>
+
         </ol>
     </section>
 
     <div class="container">
         <div class="box box-primary" style="padding: 1em 2em">
 
-                    <div class="box-header" data-toggle="tooltip" title="Header tooltip" >
-                        <div class="col-lg-3 col-xs-12" >
-                            <p class="box-title">Header</p>
-                        </div>
-                    </div>
-
-                    <div class="box-body">
-                    {{-- Box Body + table responsive--}}
-                                        <div class="box-body table-responsive">
-                                            <table id="example2" class="table table-bordered table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Nom</th>
-                                                    <th>Prénom</th>
-                                                    <th>Login</th>
-                                                    <th>email</th>
-                                                    <th>Total Achats</th>
-                                                    <th>Adr. Facturation</th>
-                                                    <th>Adr. Livraison 1</th>
-                                                    <th>Adr. Livraison 2 </th>
-                                                </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                @foreach($userList as $user)
-                                                    <tr>
-                                                        <td>{{$user->id}}</td>
-                                                        <td>{{$user->firstName}}</td>
-                                                        <td>{{$user->lastName}}</td>
-                                                        <td>{{$user->login}}</td>
-                                                        <td>{{$user->email}}</td>
-                                                        <td>{{rand(15,30)}}</td>
-                                                        <td style="white-space: nowrap;">
-                                                            @if($user->idFactAdress!=null)
-                                                                {{--{{$user->adress->where('id', '=', $user->idFactAdress)->first()->street . "&nbsp;".--}}
-                                                                {{--$user->adress->where('id', '=', $user->idFactAdress)->first()->number }}<br>--}}
-                                                                {{--{{$user->adress->where('id', '=', $user->idFactAdress)->first()->postCode."&nbsp; ".--}}
-                                                                {{--$user->adress->where('id', '=', $user->idFactAdress)->first()->city }}<br>--}}
-                                                                {{--{{$user->adress->where('id', '=', $user->idFactAdress)->first()->country}}--}}
-                                                                <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
-
-                                                        @else <span class="glyphicon glyphicon-remove" style="color: red;"></span>
-                                                            @endif
-                                                        </td>
-                                                        <td style="white-space: nowrap;">
-                                                            @if($user->idShipAdress1!=null)
-                                                                {{--{{$user->adress->where('id', '=', $user->idShipAdress1)->first()->street . "&nbsp;".--}}
-                                                                {{--$user->adress->where('id', '=', $user->idShipAdress1)->first()->number }}<br>--}}
-                                                                {{--{{$user->adress->where('id', '=', $user->idShipAdress1)->first()->postCode."&nbsp; ".--}}
-                                                                {{--$user->adress->where('id', '=', $user->idShipAdress1)->first()->city }}<br>--}}
-                                                                {{--{{$user->adress->where('id', '=', $user->idShipAdress1)->first()->country}}--}}
-                                                                <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
-                                                            @else <span class="glyphicon glyphicon-remove" style="color: red;"></span>
-                                                        @endif
-                                                        <td style="white-space: nowrap;">
-                                                            @if($user->idShipAdress2!=null)
-                                                                {{--{{$user->adress->where('id', '=', $user->idShipAdress2)->first()->street . "&nbsp;".--}}
-                                                                {{--$user->adress->where('id', '=', $user->idShipAdress2)->first()->number }}<br>--}}
-                                                                {{--{{$user->adress->where('id', '=', $user->idShipAdress2)->first()->postCode."&nbsp; ".--}}
-                                                                {{--$user->adress->where('id', '=', $user->idShipAdress2)->first()->city }}<br>--}}
-                                                                {{--{{$user->adress->where('id', '=', $user->idShipAdress2)->first()->country}}--}}
-                                                                <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
-
-                                                            @else<span class="glyphicon glyphicon-remove" style="color: red;"></span>
-                                                        @endIf
-                                                    </tr>
-                                                @endforeach
-
-                                                </tbody>
-                                                <tfoot>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Nom</th>
-                                                    <th>Prénom</th>
-                                                    <th>Login</th>
-                                                    <th>email</th>
-                                                    <th>Total Achats</th>
-                                                    <th>Adr. Facturatio</th>
-                                                    <th>Adr. Livraison 1</th>
-                                                    <th>Adr. Livraison 2 </th>
-                                                </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>{{-- Box Body + table responsive--}}
-
-                    </div>
-                    <div class="box-footer">
-                        <h1 class="box-title">Footer</h1>
-
-                    </div>
+            <div class="box-header" data-toggle="tooltip" title="Header tooltip" >
+                <div class="col-lg-3 col-xs-12" >
+                    <p class="box-title">User</p>
                 </div>
+            </div>
 
+            <div class="box-body" >
+
+
+                    {{--<h1 class="box-title" >body</h1>--}}
+                <table id="myTable" class="table table-striped table-bordered table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th></th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        {{--<th>Login</th>--}}
+                        <th>email</th>
+                        <th style="min-width: 5em">Role</th>
+                        <th>Adr. Facturation</th>
+                        <th>Adr. Livraison</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($userList as $user)
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td>
+                                {!! Form::open(['method' => 'GET', 'route' => ['user.show', $user->id,]]) !!}
+                                @if($user->role=='admin')
+                                    <div class="form-group ">
+                                        {{Form::button('<i class="fa fa-eye"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm'] )  }}
+                                    </div>
+                                @elseif($user->role=='client')
+                                    <div class="form-group ">
+                                        {{Form::button('<i class="fa fa-eye"></i>', ['type' => 'submit', 'class' => 'btn btn-primary btn-sm'] )  }}
+                                    </div>
+                                @elseif($user->role=='seller')
+                                    <div class="form-group ">
+                                        {{Form::button('<i class="fa fa-eye"></i>', ['type' => 'submit', 'class' => 'btn btn-success btn-sm'] )  }}
+                                    </div>
+                                @endif
+                                {!! Form::close() !!}
+                            </td>
+                            <td>{{$user->firstName}}</td>
+                            <td>{{$user->lastName}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>
+                         <?php
+                                $lesRoles= ['0'=>'Admin','1'=>'Client','2'=>'Vendeur'];
+                                if($user->role=='admin') $role=0;
+                                elseif($user->role=='client')$role=1;
+                                elseif($user->role=='seller') $role=2;
+                                ?>
+
+                                {!! Form::open(['method' => 'put', 'route' => ['user.update', $user->id]]) !!}
+                                <div class="form-group ">
+                                    {{ Form::select('role',$lesRoles ,$role,['class'=>'form-control selectRole','onchange'=>'upDateRole(this,'.$user->id.')']) }}
+                                    {!! Form::close() !!}
+                                </div>
+                            </td>
+                            <td >
+                                @if($user->idFactAdress!=null)
+                                    <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
+                                @else <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+                                @endif
+                            </td>
+                            <td >
+                                @if($user->idShipAdress1!=null)
+
+                                    <span class="glyphicon glyphicon-check" style="color: limegreen;"></span>
+                                @else <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+                                @endif
+                            </td>
+                            <td>
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id]]) !!}
+                                {!! Form::submit('Supprimer', ['class' => 'btn btn-danger btnProductAdmin', 'onclick' => 'return confirm(\'Voulez vous vraiment supprimer cet utilisateur ?\')'])  !!}
+                                {!! Form::close() !!}
+                            </td>
+
+                        </tr>
+                    @endforeach
+
+
+                    </tbody>
+
+
+                    <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th></th>
+
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>email</th>
+                        <th>Role</th>
+                        <th>Adr. Facturation</th>
+                        <th>Adr. Livraison</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+                </div>
+            </div>
+        </div>
     </div>
 
-@endsection
-@section('section')
-
-
+    <script>
+        $(function() {
+            $("#myTable").dataTable();
+        });
+    </script>
 @endsection
 
 @section('footer')
+
+
 @endsection
+<!-- page script -->

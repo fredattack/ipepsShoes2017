@@ -42,9 +42,21 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+                        @if (Auth::check())
+                            {{--//show logged in navbar--}}
+                            @if(Auth::user()->role=='admin')
+                                <li><a href="{{ route('admin') }}">admin</a></li>
+
+                            @elseif(Auth::user()->role=='client')
+                                <li><a href="#">Panier</a></li>
+                            @elseif(Auth::user()->role=='seller')
+                                <li><a href="#">Commande</a></li>
+                            @endif
+                        @endif
+
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

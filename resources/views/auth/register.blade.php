@@ -19,12 +19,12 @@
                                 {!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}
                             </div>
                         </div>
-                        {{--surname--}}
-                        {!! Form::label('surname', 'Surname:',null, ['class' => 'form-control col-md-4']) !!}
-                        <div class="form-group{{ $errors->has('surname') ? ' has-error' : '' }}">
+                        {{--lastName--}}
+                        {!! Form::label('lastName', 'lastName:',null, ['class' => 'form-control col-md-4']) !!}
+                        <div class="form-group{{ $errors->has('lastName') ? ' has-error' : '' }}">
                             <div class="col-md-6">
-                                {!! Form::text('surname',null, ['class' => 'form-control']) !!}
-                                {!! $errors->first('surname', '<small class="help-block">:message</small>') !!}
+                                {!! Form::text('lastName',null, ['class' => 'form-control']) !!}
+                                {!! $errors->first('lastName', '<small class="help-block">:message</small>') !!}
                             </div>
                         </div>
                         {{--login--}}
@@ -82,8 +82,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
-                </div>
+Fs                </div>
             </div>
         </div>
     </div>

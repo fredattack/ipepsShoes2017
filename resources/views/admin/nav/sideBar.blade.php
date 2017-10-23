@@ -29,7 +29,6 @@ $badge=\App\Http\Controllers\AdminController::badgeGenerator()
                     <i class="fa fa-th"></i>
                     <span>Modéles</span>
                     <small class="badge pull-right bg-green">{{$badge['modele']}}</small>
-
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">

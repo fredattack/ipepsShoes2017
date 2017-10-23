@@ -64,6 +64,9 @@
 
 }
 
+.boxModele{
+    min-height: 16em;
+}
 
 .badgeReduction {
     /*display: inline-block;*/

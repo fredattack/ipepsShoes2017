@@ -40,7 +40,7 @@
             @foreach($modeleList as $modele)
                 @if($modele->idGender == $gender->id)
                     <div class="col-lg-4 col-xs-12" >
-                        <div class="box box-primary" style="padding: 1em 2em">
+                        <div class="box box-primary boxModele" style="padding: 1em 2em">
 
                             <div class="box-header" data-toggle="tooltip" title="Header tooltip"  >
                                 <div class="col-lg-6 col-xs-12">
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
 
-                            <div class="box-body">
+                            <div class="box-body  boxModele">
                                 <div class="row">
                                     <div class="col-lg-5 col-xs-5 ">
                                         <img class="productImageAdmin" src='/image/{{$modele->image}}' >

@@ -13,9 +13,20 @@ class BrandController extends Controller
    */
   public function index()
   {
-    
+      $brandList= \App\Brand::all();
+    return $brandList;
   }
 
+    static function indexBrand()
+    {
+        $brandList= \App\Brand::all();
+        foreach ($brandList as $brand)
+        {
+        $count=\App\Modele::where('idBrand',$brand->id)->count();
+        $brand['count']=$count;
+        }
+        return $brandList;
+    }
   /**
    * Show the form for creating a new resource.
    *

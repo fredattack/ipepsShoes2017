@@ -55,7 +55,7 @@
                             </div>
                         </div>
 
-                        <div class="box-body">
+                        <div class="box-body boxModele">
                             <div class="row">
                                 <div class="col-lg-5 col-xs-5 ">
                                     <img class="productImageAdmin" src='/image/{{$modele->image}}' >

@@ -46,7 +46,7 @@
             </div>
             {{-- Box Body + table responsive--}}
                                 <div class="box-body table-responsive">
-                                    <table id="example2" class="table table-bordered table-hover text-center">
+                                    <table  class="table table-bordered table-hover text-center">
                                         <thead>
                                         <tr>
                                             <th>N°</th>
@@ -138,7 +138,7 @@
 
                     {{-- Box Body + table responsive--}}
                                         <div class="box-body table-responsive">
-                                            <table id="example2" class="table table-bordered table-hover text-center">
+                                            <table id="myTable" class="table table-bordered table-hover text-center">
                                                 <thead>
                                                 <tr>
                                                     <th>N°</th>
@@ -185,16 +185,7 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
-
                                                 </tbody>
-                                                <tfoot>
-                                                <tr>
-                                                    <th>N°</th>
-                                                    <th>User Id</th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                                </tfoot>
                                             </table>
                                         </div>{{-- Box Body + table responsive--}}
 
@@ -204,13 +195,14 @@
                     </div>
                 </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $('#mySecondTable').DataTable();
+        });
+    </script>
 </div>
 @endsection
 
-@section('section')
-
-
-@endsection
 
 @section('footer')
 @endsection
