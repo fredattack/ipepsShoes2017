@@ -1,6 +1,7 @@
 <?php
 $modeleList=\App\Http\Controllers\ReductionController::indexPromo()
 ?>
+
 <div class="recommended_items"><!--recommended_items-->
     <h2 class="title text-center">Super Deals</h2>
 
@@ -17,7 +18,9 @@ $modeleList=\App\Http\Controllers\ReductionController::indexPromo()
                                 <h4 class="reducePrice " >{{$modeleList[$i]->price}}€</h4>
                                 <h2>{{number_format ($modeleList[$i]->price-$modeleList[$i]->price*$modeleList[$i]->reduction->value/100,2)}}€</h2>
 
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Panier</a>
+                                {!! Form::open(['method' => 'GET', 'route' => ['show', $modeleList[$i]->id,]]) !!}
+                                {{Form::button('<i class="fa fa-eye">Détails</i>', ['type' => 'submit', 'class' => 'btn btn-default add-to-cart'] )  }}
+                                {!! Form::close() !!}
                             </div>
                         </div>
                     </div>
@@ -38,7 +41,9 @@ $modeleList=\App\Http\Controllers\ReductionController::indexPromo()
                                     <h4 class="reducePrice " >{{$modeleList[$i]->price}}€</h4>
                                     <h2>{{number_format ($modeleList[$i]->price-$modeleList[$i]->price*$modeleList[$i]->reduction->value/100,2)}}€</h2>
 
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Panier</a>
+                                    {!! Form::open(['method' => 'GET', 'route' => ['show', $modeleList[$i]->id,]]) !!}
+                                    {{Form::button('<i class="fa fa-eye">Détails</i>', ['type' => 'submit', 'class' => 'btn btn-default add-to-cart'] )  }}
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
                         </div>

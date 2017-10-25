@@ -20,12 +20,26 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+/*
+|--------------------------------------------------------------------------
+| shop Routes
+|--------------------------------------------------------------------------
+|
+|
+*/
 Route::get('/', 'ModeleController@shopIndex')->name('shop');
 Route::get('/shop/femme', 'ModeleController@shopIndexFemme')->name('shopFemme');
 Route::get('/shop/enfant', 'ModeleController@shopIndexEnfant')->name('shopEnfant');
 Route::get('/shop/homme', 'ModeleController@shopIndexHomme')->name('shopHomme');
-
+Route::get('/shop/{id}', 'ShoeController@show')->name('show');
+Route::get('/Brand/{id}', 'ModeleController@brandList')->name('brand');
+Route::get('/cart', 'CartController@show')->name('cart');
+Route::post('/cart', 'CartController@storeInSession')->name('cartStoreInSession');
+Route::get('/cartPlus/{id}/{quantity}', 'CartController@cartUpdatePlus')->name('cartUpdatePlus');
+Route::get('/cartMinus/{id}/{quantity}', 'CartController@cartUpdateMinus')->name('cartUpdateMinus');
+Route::get('/cart/{id}', 'CartController@destroy')->name('cartDestroy');
 /*
+
 |--------------------------------------------------------------------------
 | adminPanel Routes
 |--------------------------------------------------------------------------

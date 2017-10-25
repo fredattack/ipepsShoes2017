@@ -22,30 +22,40 @@
     <script src={{asset('shopZone/js/respond.min.js')}}></script>
     <![endif]-->
     <!-- css End -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 
 <!-- Body Start -->
 
+
+
+
 <body>
-    <header class="header">@yield('header')</header>
+<header class="header">@yield('header')</header>
     {{--<nav >@yield('nav')</nav>--}}
     <div class="container">
-        <section style="min-height: 30em">@yield('slider') </section>
-        {{--<div class="row">--}}
-            <aside class="left-side ">@yield('asideLeft')</aside>
-            <aside class="right-side ">
-                    @yield('section')
+        <section>@yield('slider') </section>
+        <div class="row">
+        <aside class="left-side ">@yield('asideLeft')</aside>
+        <aside class="right-side ">
+                @yield('section')
             </aside>
 
-                <section class="col-sm-12">
+        <section class="col-sm-12">
                     @yield('bottomSlider')
                 </section>
-        {{--</div>--}}
+        </div>
     </div>
     <footer class="footer">@yield('footer')</footer>
-<!--scripts -->
-    <script src={{asset('shopZone/js/jquery.js')}}></script>
+
+
+
+
+
+    <!--scripts -->
     <script src={{asset('shopZone/js/bootstrap.min.js')}}></script>
+    <script src={{asset('shopZone/js/jquery.js')}}></script>
     <script src={{asset('shopZone/js/jquery.scrollUp.min.js')}}></script>
     <script src={{asset('shopZone/js/price-range.js')}}></script>
     <script src={{asset('shopZone/js/jquery.prettyPhoto.js')}}></script>

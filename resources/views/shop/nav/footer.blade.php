@@ -64,7 +64,7 @@
                         <h2>A propos de <span>S</span>carpe<span>F</span>ine</h2>
                         <form action="#" class="searchform">
                             <input type="text" placeholder="Votre adresse e-mail" />
-                            <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+                            <button type="submit" class="btn btn-default" ><i class="fa fa-arrow-circle-o-right"></i></button>
                             <p>Pour êre averti de nos promotions et actions spéciales</p>
                         </form>
                     </div>

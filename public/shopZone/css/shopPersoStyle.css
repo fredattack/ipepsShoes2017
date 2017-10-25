@@ -1,8 +1,38 @@
 .reducePrice{
     text-decoration: line-through red;
     color: red;
+    margin-right:1em;
 }
 
 .badge{
     background: #669999;
+}
+.brandLogo{
+    margin-right: 3em;
+    float: right;
+}
+.brandLogo img{
+    width: 10em;
+    height: 10em;
+
+}
+
+.selectSize option:disabled{
+  color: #e0e0e0;
+}
+
+.nameBrand{
+    color: #696763;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nameBrand a:hover{
+    color: #669999;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
 }

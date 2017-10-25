@@ -6,7 +6,7 @@ $modeleList=\App\Http\Controllers\reductionController::indexPromo()
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                <div id="slider-carousel" class="carousel slide " data-ride="carousel">
                     <ol class="carousel-indicators">
                         @for($i=0;$i<count($modeleList);$i++)
                             @if($i==0)
@@ -35,7 +35,9 @@ $modeleList=\App\Http\Controllers\reductionController::indexPromo()
                                     </div>
                                 </div>
                                 <div class="row">
-                                <button type="button" class="btn btn-default get">Get it now</button>
+                                    {!! Form::open(['method' => 'GET', 'route' => ['show', $modeleList[$i]->id,]]) !!}
+                                    {{Form::button('Voir l\'offre ', ['type' => 'submit', 'class' => 'btn btn-default get'] )  }}
+                                    {!! Form::close() !!}
                                 </div>
 
 
@@ -61,7 +63,9 @@ $modeleList=\App\Http\Controllers\reductionController::indexPromo()
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <button type="button" class="btn btn-default get">Get it now</button>
+                                            {!! Form::open(['method' => 'GET', 'route' => ['show', $modeleList[$i]->id,]]) !!}
+                                            {{Form::button('Voir l\'offre ', ['type' => 'submit', 'class' => 'btn btn-default get'] )  }}
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-6"> <!--image-->

@@ -35,16 +35,11 @@
             <div class="brands-name">
                 <ul class="nav nav-pills nav-stacked">
                     @foreach($brandList as $brand)
-                        {{--<small class="badge pull-right bg-green">{{$badge['modele']}}</small>--}}
-
-                        <li><a href="#">   <small class="badge pull-right">{{$brand['count']}}</small>{{$brand->name}}</a></li>
+                        {{--." <small class='badge pull-right'>{{$brand['count']}}</small>"--}}
+                        {!! Form::open(['method' => 'GET', 'route' => ['brand', $brand->id]]) !!}
+                        {!! Form::submit($brand->name , ['class' => 'btn btn-link inline-form nameBrand' ])  !!}
+                        {!! Form::close() !!}
                     @endforeach
-                    {{--<li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>--}}
-                    {{--<li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>--}}
-                    {{--<li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>--}}
-                    {{--<li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>--}}
-                    {{--<li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>--}}
-                    {{--<li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>--}}
                 </ul>
             </div>
         </div><!--/brands_products-->

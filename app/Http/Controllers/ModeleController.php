@@ -97,6 +97,16 @@ class ModeleController extends Controller
         return view('admin.modele.indexHomme',compact(['modeleList','genderList','reductionList']));
 
     }
+
+
+    public function brandList($id)
+    {
+        $modeleList= \App\Modele::where('idBrand',$id)->orderBy('idGender')->get();
+        $genderList =\App\Gender::get();
+        $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
+
+        return view('shop.index',compact(['modeleList','genderList','reductionList']));
+    }
   /**
    * Show the form for creating a new resource.
    *
