@@ -38,6 +38,12 @@ Route::post('/cart', 'CartController@storeInSession')->name('cartStoreInSession'
 Route::get('/cartPlus/{id}/{quantity}', 'CartController@cartUpdatePlus')->name('cartUpdatePlus');
 Route::get('/cartMinus/{id}/{quantity}', 'CartController@cartUpdateMinus')->name('cartUpdateMinus');
 Route::get('/cart/{id}', 'CartController@destroy')->name('cartDestroy');
+Route::get('/checkOut', 'CheckOutController@show')->name('checkOut');
+Route::post('/checkOutAdress', 'CheckOutController@showCart')->name('checkOutAdress');
+Route::get('/checkOutCart', 'CheckOutController@showPaiement')->name('checkOutCart');
+Route::get('/PayOut/{total}', 'CheckOutController@makePaiement')->name('payOut');
+
+
 /*
 
 |--------------------------------------------------------------------------

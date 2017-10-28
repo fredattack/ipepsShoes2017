@@ -20,6 +20,11 @@ class shoeController extends Controller
 
 
       $shoesList= \App\Shoe::with('modele')->orderBy('idModele')->get();
+//      dd($shoesList);
+
+
+
+
       $genderList =\App\Gender::orderBy('name')->pluck('name', 'id');
       $typeList =\App\Type::orderBy('name')->pluck('name', 'id');
       $brandList =\App\Brand::orderBy('name')->pluck('name', 'id');

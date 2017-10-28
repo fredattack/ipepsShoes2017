@@ -15,7 +15,9 @@ class ModeleController extends Controller
    */
   public function index()
   {
-    $modeleList= \App\Modele::with(array('type','brand'))->orderBy('idGender')->get();
+    $modeleList= \App\Modele::with(array('type','brand','gender'))->orderBy('idGender')->get();
+
+
     $genderList =\App\Gender::orderBy('id')->get();
     $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
 

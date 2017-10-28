@@ -36,3 +36,6 @@
     text-decoration: none;
     text-transform: uppercase;
 }
+#shipAdressBlock{
+    display:none;
+}

@@ -33,15 +33,11 @@
                     {{Form::open(array('route' => 'cartStoreInSession'),['class'=>'form-inline'])}}
                     <input type="hidden" name="idModele" value="{{$leModele->id}}">
                     <div class="row" style="margin-top: 1em">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 ">
                         <label>Quantité:</label>
-                        <td class="cart_quantity">
+                        <td class="cart_quantity pull-right" >
                             <div class="cart_quantity_button">
-                                {{--<div class="form-control">--}}
-                                <a class="cart_quantity_up" onclick="updateQuantity(1)"> + </a>
-                                <input class="cart_quantity_input" type="text" name="quantity" id="quantity"  value="1" autocomplete="off" size="2">
-                                <a class="cart_quantity_down" onclick="updateQuantity(-1)"> - </a>
-                                {{--</div>--}}
+                                <input class="cart_quantity_input form-control" type="number" name="quantity" id="quantity"  value="1" min="1" autocomplete="off" size="1" style="width: 5em">
                             </div>
                         </td>
                 </div>
@@ -154,8 +150,12 @@
     </div>
 </div>
 <script>
+//    if($('#quantity').val()==1)
+//    {
+//        alert('quantityMinus');
+//    }
     function updateQuantity(val) {
-   quantity=  parseInt($('#quantity').val()) + val;
+    quantity=  parseInt($('#quantity').val()) + val;
      $('#quantity').val(quantity);
 
     }

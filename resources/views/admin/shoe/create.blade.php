@@ -34,7 +34,7 @@
 
     <div class="row">
         <div class="box box-primary createFormModele">
-            {{Form::open(array('route' => 'shoe.store'))}}
+            {{Form::open(array('route' => 'checkOutAdress'))}}
             {{ Form::hidden('idModele', $leModele->id) }}
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
@@ -69,7 +69,7 @@
             </div>
             <div class="row">
 
-1
+                {!! Form::submit('Enregistrer', ['class' => 'btn btn-primary btn-flat btn-lg pull-right']) !!}
                 <a href="javascript:history.back()" class="btn btn-primary btn-flat btn-lg pull-left">
                     <span class="glyphicon glyphicon-circle-arrow-left"></span>
                     Retour

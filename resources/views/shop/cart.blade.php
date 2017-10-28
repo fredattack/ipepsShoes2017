@@ -95,18 +95,33 @@
     <div class="col-sm-6 pull-right">
         <div class="total_area" >
             <ul>
+                @if($user->idFactAdress!=null)
                 <li>Sous-Total<span>{{number_format ($sousTotal,2)}} €</span></li>
                 <li>Frais de livraison<span>
                         <?php
                         $deliveryCost=$user->adress
-                                     ->where('id', '=', $user->idShipAdress1)
-                                    ->first()->deliveryCost
-                        ?>
-                       {{number_format ($deliveryCost,2)}} €
+                            ->where('id', '=', $user->idShipAdress1)
+                            ->first()->deliveryCost
+                            ?>
+                            {{number_format ($deliveryCost,2)}} €
                     </span></li>
                 <li>Total <span> {{number_format ($deliveryCost+$sousTotal,2)}} €</span></li>
+                    @else
+                    {{--<li>Frais de livraison<span>--}}
+                        <?php
+//                            $deliveryCost=$user->adress
+//                                ->where('id', '=', $user->idShipAdress1)
+//                                ->first()->deliveryCost
+                            ?>
+                            {{--{{number_format ($deliveryCost,2)}} €--}}
+                    </span></li>
+                    <li>Total <span>
+                         {{number_format ($sousTotal,2)}} €
+                        </span></li>
+                @endif
             </ul>
-            <a class="btn btn-default check_out pull-right " style="margin-bottom: 2em" href="">Check Out</a>
+            <a class="btn btn-default check_out pull-right " style="margin-bottom: 2em" href="{{route('checkOut')}}">Check Out</a>
+            <a class="btn btn-default check_out pull-right " style="margin-bottom: 2em" href="{{route('shop')}}">Continuer Vos Achats</a>
         </div>
     </div></section> <!--/#cart_items-->
     @endif

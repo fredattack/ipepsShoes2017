@@ -36,9 +36,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     @foreach($brandList as $brand)
                         {{--." <small class='badge pull-right'>{{$brand['count']}}</small>"--}}
-                        {!! Form::open(['method' => 'GET', 'route' => ['brand', $brand->id]]) !!}
-                        {!! Form::submit($brand->name , ['class' => 'btn btn-link inline-form nameBrand' ])  !!}
-                        {!! Form::close() !!}
+
                     @endforeach
                 </ul>
             </div>

@@ -11,7 +11,7 @@
             <h2 class="title text-center">{{$gender->name}}</h2>
                 @foreach($modeleList as $modele)
                     @if($modele->idGender == $gender->id)
-                    <div class="col-sm-4 pull-left">
+                    <div class="col-sm-12 col-lg-4">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">

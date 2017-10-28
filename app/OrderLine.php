@@ -9,8 +9,8 @@ class OrderLine extends Model
 
     protected $table = 'orderLines';
     public $timestamps = true;
-    protected $fillable = array('idOrder','idShoes','quantity');
-    protected $visible = array('quantity');
+    protected $fillable = array('idOrder','idShoe','quantity');
+    protected $visible = array('idOrder','idShoe','quantity');
 
     public function order()
     {
