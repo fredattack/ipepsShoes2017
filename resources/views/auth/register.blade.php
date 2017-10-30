@@ -1,90 +1,105 @@
-@extends('layouts.app')
+@extends('layouts.shopLayout')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+@section('title')
+@endsection
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
+@section('header')
+    @include('shop.nav.header')
+@endsection
 
-                        {{--firstName--}}
-                        {!! Form::label('firstName', 'FirstName:',null, ['class' => 'form-control col-md-4']) !!}
-                        <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
-                            <div class="col-md-6">
-                                {!! Form::text('firstName',null, ['class' => 'form-control']) !!}
-                                {!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}
-                            </div>
-                        </div>
-                        {{--lastName--}}
-                        {!! Form::label('lastName', 'lastName:',null, ['class' => 'form-control col-md-4']) !!}
-                        <div class="form-group{{ $errors->has('lastName') ? ' has-error' : '' }}">
-                            <div class="col-md-6">
-                                {!! Form::text('lastName',null, ['class' => 'form-control']) !!}
-                                {!! $errors->first('lastName', '<small class="help-block">:message</small>') !!}
-                            </div>
-                        </div>
-                        {{--login--}}
-                        {!! Form::label('login', 'Login:',null, ['class' => 'form-control col-md-4']) !!}
-                        <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
-                            <div class="col-md-6">
-                                {!! Form::text('login',null, ['class' => 'form-control']) !!}
-                                {!! $errors->first('login', '<small class="help-block">:message</small>') !!}
-                            </div>
-                        </div>
-                        {{--email--}}
+@section('slider')
+    {{--@include('shop.slider.mainSlider')--}}
+@endsection
 
-                        <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+@section('asideLeft')
+    {{--@include('shop.nav.sideBar')--}}
+@endsection
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+@section('section')
+    {{--<h1>Section</h1>--}}
+    <div class="container">
+        <section id="form"><!--form-->
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        {{--password--}}
+            <div class="container">
+                <img src="{{asset("/image/background.jpg")}}" id="bg" alt="">
 
-                        <label for="password" class="col-md-4 control-label">Password</label>
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-1">
+                    <div class="login-form"><!--login form-->
+                        <h2>Connectez vous à votre compte</h2>
+                        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                            {{ csrf_field() }}
+                            {{--Email--}}
+                                    <input id="email" type="email"  name="emailLog" value="{{ old('email') }}" placeholder="Email" required autofocus>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                    @if ($errors->has('emailLog'))<span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+                                    @endif
+                                    <input id="password" type="password" class="form-control" name="passwordLog" placeholder="Password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        {{--password-confirm--}}
+                                    @if ($errors->has('passwordLog'))<span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                                    @endif
 
-                        <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                        <div class="form-group">
+                            <span>
+								<input type="checkbox" class="checkbox">
+								Se souvenir de moi
+							</span>
+                            <button type="submit" class="btn btn-default">Connection</button>
+                        </form>
+                    </div><!--/login form-->
+                </div>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
+        {{--<div class="col-sm-1">--}}
+            {{--<h2 class="or">OR</h2>--}}
+        {{--</div>--}}
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-Fs                </div>
+                {{--<div class="col-sm-4">--}}
+                    {{--<div class="signup-form"><!--sign up form-->--}}
+                        {{--<h2>Nouvel Utilisteur? Creez un compte!</h2>--}}
+                        {{--<form class="form-horizontal" method="POST" action="{{ route('register') }}">--}}
+
+                            {{--{{ csrf_field() }}--}}
+
+                            {{--firstName--}}
+                                    {{--{!! Form::text('firstName',null, ['class' => 'form-control','placeholder'=>'Prénom']) !!}--}}
+                                    {{--{!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}--}}
+                            {{--lastName--}}
+                                    {{--{!! Form::text('lastName',null, ['class' => 'form-control','placeholder'=>'Nom']) !!}--}}
+                                    {{--{!! $errors->first('lastName', '<small class="help-block">:message</small>') !!}--}}
+                            {{--login--}}
+                                    {{--{!! Form::text('login',null, ['class' => 'form-control','placeholder'=>'Login']) !!}--}}
+                                    {{--{!! $errors->first('login', '<small class="help-block">:message</small>') !!}--}}
+                            {{--email--}}
+                                    {{--<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required>--}}
+                                     {{--{!! $errors->first('email', '<small class="help-block">:message</small>') !!}--}}
+                            {{--password--}}
+                                    {{--<input id="password" type="password" class="form-control" name="password" placeholder="Password" required>--}}
+                                    {{--{!! $errors->first('email', '<small class="help-block">:message</small>') !!}--}}
+                            {{--password-confirm--}}
+                                    {{--<input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Password Confirm " required>--}}
+                                    {{--<button type="submit" class="btn btn-primary">--}}
+                                        {{--S'enregistrer--}}
+                                    {{--</button>--}}
+
+
+                        {{--</form>--}}
+                    {{--</div><!--/sign up form-->--}}
+                {{--</div>--}}
             </div>
+
         </div>
+    </section><!--/form-->
     </div>
-</div>
+@endsection
+
+@section('bottomSlider')
+    {{--@include('shop.slider.bottomSlider')--}}
+    @endsection
+@section('footer')
+    @include('shop.nav.footer')
+    <script>
+        $('.header-middle').css('display','none');
+        $('.header-bottom').css('display','none');
+        $('.html').css('background','/image/')
+
+    </script>
 @endsection
