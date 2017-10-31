@@ -54,6 +54,7 @@
 
 
     <!--scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src={{asset('shopZone/js/bootstrap.min.js')}}></script>
     <script src={{asset('shopZone/js/jquery.js')}}></script>
     <script src={{asset('shopZone/js/jquery.scrollUp.min.js')}}></script>

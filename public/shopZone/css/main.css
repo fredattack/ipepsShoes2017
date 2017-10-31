@@ -345,18 +345,20 @@ ul.sub-menu {
 *******Footer CSS******
 **************************/
 
+
 #footer {
   background: #F0F0E9;
+  position: relative;
 }
 
 
 .footer-top .container {
   border-bottom: 1px solid #E0E0DA;
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
 }
 
 .companyinfo {
-  margin-top: 57px;
+  /*margin-top: 57px;*/
 }
 
 .companyinfo h2 {
@@ -447,7 +449,7 @@ ul.sub-menu {
 
 
 .address {
-  margin-top: 30px;
+  /*margin-top: 30px;*/
   position: relative;
   overflow: hidden;
 }
@@ -466,12 +468,12 @@ ul.sub-menu {
 }
 
 .footer-widget {
-  margin-bottom: 68px;
+  margin-bottom: 3em;
 }
 
 .footer-widget .container {
   border-top: 1px solid #FFFFFF;
-  padding-top: 15px;
+  padding-top: 2em;
 }
 
 .single-widget h2 {
@@ -1451,8 +1453,8 @@ h2.title {
 
 #form {
   display: block;
-  margin-bottom: 185px;
-  margin-top: 185px;
+  margin-bottom: 5em;
+  margin-top: 5em;
   overflow: hidden;
 }
 
