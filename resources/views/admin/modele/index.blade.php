@@ -35,7 +35,7 @@
     @foreach($genderList as $gender)
 
         <div class="col-lg-12">
-            <h1 class="productGenderTitleAdmin">{{$gender->name}} </h1>
+            <h1.git class="productGenderTitleAdmin">{{$gender->name}} </h1.git>
 
             @foreach($modeleList as $modele)
                 @if($modele->idGender == $gender->id)
