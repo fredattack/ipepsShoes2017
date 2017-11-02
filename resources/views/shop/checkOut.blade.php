@@ -250,7 +250,7 @@
             <ul>
                 @if($user->idFactAdress!=null)
                     <li>Sous-Total<span>{{number_format ($sousTotal,2)}} €</span></li>
-                    <li>Frais de livraison<span>
+                    <li>Frais de livraison:<span>
                         <?php
                             $deliveryCost=$user->adress
                                 ->where('id', '=', $user->idShipAdress1)
@@ -264,13 +264,7 @@
                     @else
                     <li>Sous-Total<span>{{number_format ($sousTotal,2)}} €</span></li>
                     <li>Frais de livraison<span>
-                <?php
-                    //                                                $deliveryCost=$user->adress
-                    //                                                    ->where('id', '=', $user->idShipAdress1)
-                    //                                                    ->first()->deliveryCost
-                    ?>
 
-                    {{--{{number_format ($deliveryCost,2)}} €--}}
 
                     A calculer
                         </span></li>

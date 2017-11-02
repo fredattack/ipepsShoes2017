@@ -52,6 +52,13 @@ class OrderController extends Controller
         return view('admin.order.show',compact(['order','orderLineList']));
   }
 
+    public function showFront($id)
+    {
+        $order = \App\Order::with(array('user','shipment','orderLine'))->findOrFail($id);
+        $productTempList=\App\OrderLine::with(array('shoe'))->where('idOrder',$id)->get();
+//        dd($orderLineList);
+        return view('Shop.orderShow',compact(['order','productTempList']));
+    }
   /**
    * Show the form for editing the specified resource.
    *

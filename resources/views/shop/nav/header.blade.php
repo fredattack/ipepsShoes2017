@@ -61,7 +61,12 @@
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <a href="{{ route('logout') }}"
+                                            <a  class="dropdown-item" href="{{route('showFront',['id' => Auth::user()->id])}}">
+                                                votre profil
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a  class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                 Logout
@@ -137,10 +142,10 @@
                             <ul role="menu" class="sub-menu">
                                 <li><a href="shop.html">Femme</a></li>
                                 <li><a href="product-details.html">Enfant</a></li>
-                                <li><a href="checkout.html">Homme</a></li>
+                                <li><a href="#">Homme</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact-us.html">Contact</a></li>
+                        <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
                 </div>
             </div>

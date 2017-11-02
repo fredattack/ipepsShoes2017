@@ -5,32 +5,39 @@ namespace App\Http\Controllers;
 use App\Adress;
 use Illuminate\Http\Request;
 
+use Session;
+
 class CheckOutController extends Controller
 {
     //
+
+
     public function show(){
         $user=\Auth::user();
         $user=\App\User::with(array('adress'))->findOrFail($user->id);
+//        $orderAdress=\App\Adress::findOrFail($user->idShipAdress);
         $productTempList=\App\TempCartItem::with('shoe')->where('idUser',$user->id)->orderBy('idShoe')->get();
         $step=1;
-        return view('shop.checkOut',compact(['productTempList','user','step']));
+        return view('shop.checkOut',compact(['productTempList','user','step','orderAdress']));
     }
 
     public function showCart(Request $request){
+//dd($request);
         $user=\Auth::user();
-
         if($request->sameAdress=='on')
         {
 //           validation1
             $this->controlFactAdressOnly($request);
         }
         else{
+
 //            validation2
             $this->controlTwoAdress($request);
         }
 
         if($user->idFactAdress!=null)   // if user have an adress
         {
+            dd('dansla boucle');
             $this->updateUser($request, $user);
 //todo right adress of Shipment
             $idAdress=$user->idFactAdress;
@@ -42,18 +49,19 @@ class CheckOutController extends Controller
             {
                 $this->UpdateFactAdress($request, $adressFact);
                 $user->save();
+                $idAdress = $user->idFactAdress;
             }
             else
             {
                 $this->updateTwoAdress($request, $adressFact, $shipAdress);
                 $user->save();
+                $idAdress = $user->idShipAdress1;
             }
 
         }
         else
         {//if User haven't any adress
             //0 update user Info
-//            dd('Dans la boucle sans adresse');
             $user->lastName=$request->lastName;
             $user->firstName=$request->firstName;
             $user->login=$request->login;
@@ -61,31 +69,26 @@ class CheckOutController extends Controller
 
             $idFactAdress = $this->createNewFactAdress($request, $user);
 
-
             //attribute the new adress to user idFactadress
             $user->idFactAdress=$idFactAdress->id;
 
-
             if($request->sameAdress=='on')
             {
-                $user->idShipAdress1=$idFactAdress->id;
+//                $user->idShipAdress1=$idFactAdress->id;
                 $user->save();
-
+                $idAdress = $user->idShipFactAdress;
             }
             else
             {
                 $this->createShipAdress($request, $user);
-
-
+                $idAdress= $user->idShipAdress1;
             }
         }
-
+//        $orderAdress=\App\Adress::findOrFail($idOrderAdress);
         $productTempList=\App\TempCartItem::with('shoe')->where('idUser',$user->id)->orderBy('idShoe')->get();
         $step=2;
+        session(['idAdress' => $idAdress]);
         return view('shop.checkOut',compact(['productTempList','user','step']));
-
-
-
     }
 
     public function showPaiement()
@@ -227,6 +230,7 @@ class CheckOutController extends Controller
 //            $newOrder= new \App\Order();
             $newOrder['idUser'] =$user->id;
             $newOrder['totalProducts'] = $total ;
+            $newOrder['idAdress'] =  session()->get('idAdress') ;
             $newOrder=\App\Order::create($newOrder);
 
             foreach ($productTempList as $productTemp)
@@ -235,7 +239,10 @@ class CheckOutController extends Controller
                 $newOrderLine['quantity'] = $productTemp->quantity;
                 $newOrderLine['idShoe']   = $productTemp->idShoe;
                 \App\OrderLine::create($newOrderLine);
+                $this->updateStock($productTemp);
                 $productTemp->delete();
+
+
             }
 
             return view('shop.confirmCheckOut');
@@ -285,6 +292,16 @@ class CheckOutController extends Controller
         //attribute the new adress to user idFactadress
         $user->idShipAdress1 = $newShipAdress->id;
         $user->save();
+    }
+
+    /**
+     * @param $productTemp
+     */
+    public function updateStock($productTemp)
+    {
+        $laShoe = \App\Shoe::findOrFail($productTemp->idShoe);
+        $laShoe->quantity -= $productTemp->quantity;
+        $laShoe->save();
     }
 
 

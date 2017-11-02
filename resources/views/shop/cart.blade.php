@@ -24,12 +24,6 @@
     @endif
     <section id="cart_items">
         <div class="container">
-            {{--<div class="breadcrumbs">--}}
-                {{--<ol class="breadcrumb">--}}
-                    {{--<li><a href="#">Home</a></li>--}}
-                    {{--<li class="active">Shopping Cart</li>--}}
-                {{--</ol>--}}
-            {{--</div>--}}
             @if(count($productTempList)==0)
                 <div class="alert alert-success" style="margin-bottom: 11em">
                     <ul>

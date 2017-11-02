@@ -42,6 +42,11 @@ Route::get('/checkOut', 'CheckOutController@show')->name('checkOut');
 Route::post('/checkOutAdress', 'CheckOutController@showCart')->name('checkOutAdress');
 Route::get('/checkOutCart', 'CheckOutController@showPaiement')->name('checkOutCart');
 Route::get('/PayOut/{total}', 'CheckOutController@makePaiement')->name('payOut');
+Route::get('/user/{id}', 'UserController@showFront')->name('showFront');
+Route::post('/userUpdate', 'UserController@updateFront')->name('updateUser');
+Route::get('/order/{id}', 'OrderController@showFront')->name('showOrderFront');
+Route::get('/contact', 'ContactController@show')->name('contact');
+Route::post('/sendMessage', 'ContactController@sendMessage')->name('sendMessage');
 
 
 /*
