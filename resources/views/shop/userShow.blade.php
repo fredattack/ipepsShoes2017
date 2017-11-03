@@ -36,10 +36,9 @@
                     {!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}
                     <input type="text" name="lastName" onKeyUp="showButton()" placeholder="Nom" value="{{$user->lastName}}">
                     {!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}
-                    <input type="text" name="login" onKeyUp="showButton()" placeholder="User Name" value="{{$user->login}}">
-                    {!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}
                     <input type="email" name="email" onKeyUp="showButton()" placeholder="votre Email" value="{{$user->email}}">
                     {!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}
+                   <a href="" class="btn btn-primary">Changer de mot de pass</a>
                     {{--</form>--}}
                 </div>
 

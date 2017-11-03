@@ -17,6 +17,9 @@ Route::get('/laravel', function () {
 });
 
 Auth::routes();
+Route::get('/login/{service}', 'GoogleController@redirectToProvider')->name('googleLogin');
+Route::get('/login/{service}/callback', 'GoogleController@handleProviderCallback');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

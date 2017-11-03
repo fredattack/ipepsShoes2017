@@ -45,7 +45,20 @@
                     </span>
                         <button type="submit" class="btn btn-default">Connection</button>
                     </form>
+                        <div class="row">
+                            <h2 class="or">Ou</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <a href="{{route('googleLogin',['service'=>'google'])}}" class="btn btn-lg btn-primary">Google</a>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <a href="{{route('googleLogin',['service'=>'facebook'])}}" class="btn btn-lg btn-primary">Facebook</a>
+                            </div>
+
+                        </div>
                     </div><!--/login form-->
+
                     </div>
 
                     <div class="col-sm-1">
