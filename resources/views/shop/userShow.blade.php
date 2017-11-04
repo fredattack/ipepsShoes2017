@@ -100,6 +100,9 @@
                                     ->first()->country}}">
                             {!! $errors->first('factAdress_country', '<small class="help-block">:message</small>') !!}
 
+                            <p>Frais de livraison: {{$user->adress
+                                     ->where('id', '=', $user->idFactAdress)
+                                    ->first()->deliveryCost}}</p>
                         @endif
 
 
@@ -163,6 +166,10 @@
                                      ->where('id', '=', $user->idShipAdress1)
                                     ->first()->country}}">
                             {!! $errors->first('shipAdress_country', '<small class="help-block">:message</small>') !!}
+
+                            <p>Frais de livraison: {{$user->adress
+                                     ->where('id', '=', $user->idShipAdress1)
+                                    ->first()->deliveryCost}}</p>
 
                         @endif
 

@@ -124,13 +124,12 @@ class UserController extends Controller
 //            validation2
         $this->controlTwoAdress($request);
 
-
         if($user->idFactAdress!=null)   // if user have an adress
         {
-
             $this->updateUser($request, $user);
-//            dd($user);
-//todo right adress of Shipment
+
+            //todo right adress of Shipment
+
             $idAdress=$user->idFactAdress;
             $adressFact=\App\Adress::findOrFail($idAdress);
             $idShipment=$user->idShipAdress1;
@@ -146,13 +145,13 @@ class UserController extends Controller
             {
                 $this->updateTwoAdress($request, $adressFact, $shipAdress);
                 $user->save();
-//            dd('dans le else');
                 $idAdress = $user->idShipAdress1;
             }
 
         }
         else
         {//if User haven't any adress
+
             //0 update user Info
             $user->lastName=$request->lastName;
             $user->firstName=$request->firstName;
@@ -166,7 +165,6 @@ class UserController extends Controller
 
             if($request->sameAdress=='on')
             {
-//                $user->idShipAdress1=$idFactAdress->id;
                 $user->save();
                 $idAdress = $user->idShipFactAdress;
             }
@@ -176,12 +174,8 @@ class UserController extends Controller
                 $idAdress= $user->idShipAdress1;
             }
         }
-//        $orderAdress=\App\Adress::findOrFail($idOrderAdress);
         $productTempList=\App\TempCartItem::with('shoe')->where('idUser',$user->id)->orderBy('idShoe')->get();
-//        $user = \App\User::with(array('adress','order'))->findOrFail($id);
         $orderList=\App\Order::with(array('user'))->where('idUser',$user->id)->orderBy('id')->get();
-//        $totalUser=\App\Order::where('idUser',$id)->sum('TotalProducts');
-//      dd($totalUser);
      return view('shop.userShow',compact(['user','orderList']));
     }
   /**
@@ -203,7 +197,6 @@ class UserController extends Controller
         $this->validate($request, [
             'firstName' => 'bail|required|string|max:50',
             'lastName' => 'bail|required|string|max:50',
-            'login' => 'bail|required|string|max:50',
             'email' => 'bail|required|string|email|max:255',
             'factAdress_name' => 'bail|required|string|max:100',
             'factAdress_street' => 'bail|required|string|max:100',
@@ -219,10 +212,10 @@ class UserController extends Controller
      */
     public function controlTwoAdress(Request $request)
     {
+//        dd($request);
         $this->validate($request, [
             'firstName' => 'bail|required|string|max:50',
             'lastName' => 'bail|required|string|max:50',
-            'login' => 'bail|required|string|max:50',
             'email' => 'bail|required|string|email|max:255',
             'factAdress_name' => 'bail|required|string|max:100',
             'factAdress_street' => 'bail|required|string|max:100',
@@ -246,6 +239,7 @@ class UserController extends Controller
      */
     public function UpdateFactAdress(Request $request, $adressFact)
     {
+//        dd('updateFactAdress');
         //1 update FactAdress
         $adressFact->name = $request->factAdress_name;
         $adressFact->street = $request->factAdress_street;
@@ -253,7 +247,8 @@ class UserController extends Controller
         $adressFact->postCode = $request->factAdress_postCode;
         $adressFact->city = $request->factAdress_city;
         $adressFact->country = $request->factAdress_country;
-        $adressFact->deliveryCost = 5.00;//todo deliveryCost
+        $deliveryCost = $this->calculDeliveryCost($adressFact);
+        $adressFact->deliveryCost = $deliveryCost;
         $adressFact->save();
     }
 
@@ -264,6 +259,8 @@ class UserController extends Controller
      */
     public function updateTwoAdress(Request $request, $adressFact, $shipAdress)
     {
+//        dd('updateTwoAdress');
+
         //1 update FactAdress
         $adressFact->name = $request->factAdress_name;
         $adressFact->street = $request->factAdress_street;
@@ -271,7 +268,8 @@ class UserController extends Controller
         $adressFact->postCode = $request->factAdress_postCode;
         $adressFact->city = $request->factAdress_city;
         $adressFact->country = $request->factAdress_country;
-        $adressFact->deliveryCost = 5.00;//todo deliveryCost
+        $deliveryCost = $this->calculDeliveryCost($adressFact);
+        $adressFact->deliveryCost = $deliveryCost;
         $adressFact->save();
 
         //2 update ShipAdress
@@ -282,8 +280,10 @@ class UserController extends Controller
         $shipAdress->postCode = $request->shipAdress_postCode;
         $shipAdress->city = $request->shipAdress_city;
         $shipAdress->country = $request->shipAdress_country;
-        $shipAdress->deliveryCost = 5.00;//todo deliveryCost
+        $deliveryCost = $this->calculDeliveryCost($shipAdress);
+        $shipAdress->deliveryCost = $deliveryCost;
         $shipAdress->save();
+
     }
 
     /**
@@ -295,7 +295,6 @@ class UserController extends Controller
         //0 update user Info
         $user->lastName = $request->lastName;
         $user->firstName = $request->firstName;
-        $user->login = $request->login;
         $user->email = $request->email;
     }
 
@@ -310,7 +309,9 @@ class UserController extends Controller
         $newFactAdress['postCode'] = $request->factAdress_postCode;
         $newFactAdress['city'] = $request->factAdress_city;
         $newFactAdress['country'] = $request->factAdress_country;
-        $newFactAdress['deliveryCost'] = 5.00;//todo deliveryCost
+        $deliveryCost = $this->calculDeliveryCost($newFactAdress);
+        $newFactAdress['deliveryCost'] = $deliveryCost;
+
         $idFactAdress = \App\Adress::create($newFactAdress);
         return $idFactAdress;
     }
@@ -330,12 +331,40 @@ class UserController extends Controller
         $newShipAdress['postCode'] = $request->shipAdress_postCode;
         $newShipAdress['city'] = $request->shipAdress_city;
         $newShipAdress['country'] = $request->shipAdress_country;
-        $newShipAdress['deliveryCost'] = 5.00;//todo deliveryCost
+        $deliveryCost = $this->calculDeliveryCost($newShipAdress);
+        $newShipAdress['deliveryCost'] = $deliveryCost;
         //      dd($newShipAdress);
         $newShipAdress = \App\Adress::create($newShipAdress);
         //attribute the new adress to user idFactadress
         $user->idShipAdress1 = $newShipAdress->id;
         $user->save();
+    }
+
+    /**
+     * @param $adressFact
+     * @return float
+     */
+    public function calculDeliveryCost($adress)
+    {
+//        $distance = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=Huy,Belgique&destinations=" + $adress->city + "," + $adress->country + "&key=AIzaSyCLizDL0kGcKNIuAn8XwFxDcNSQbuKTXvY";
+        $distance = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=Huy,Belgique&destinations=$adress->city,$adress->country&key=AIzaSyCLizDL0kGcKNIuAn8XwFxDcNSQbuKTXvY";
+        $json = file_get_contents($distance);
+        $distance = json_decode($json, true);
+        $rows = $distance['rows'];
+//        $rows=$rows->elements;
+        $rows = $rows[0];
+        $rows = $rows['elements'][0];
+        $rows = $rows['distance'];
+        $rows = $rows['value'];
+        $distance = $rows / 1000;
+//        dd($distance);
+        if ($distance < 15) {
+            $deliveryCost = 5.00;
+        } else {
+            $kiloMetreSup = $distance - 15;
+            $deliveryCost = 5.00 + ($kiloMetreSup * 0.1);
+        }
+        return $deliveryCost;
     }
 }
 
