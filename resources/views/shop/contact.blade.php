@@ -4,6 +4,7 @@
 @endsection
 
 @section('header')
+    {!! NoCaptcha::renderJs() !!}
     @include('shop.nav.header')
 @endsection
 
@@ -19,22 +20,12 @@
     <div id="contact-page" class="container">
         <div class="bg">
 
-            <div class="row">
+            <div class="row" style="margin-bottom: 2em;">
                 <div class="col-sm-8">
                     <div class="contact-form">
                         <h2 class="title text-center">Nous Contacter</h2>
                         <div class="status alert alert-success" style="display: none"></div>
                         {{Form::open(array('route' => 'sendMessage'))}}
-
-                        {{--<input type="text" name="firstName" onKeyUp="showButton()" placeholder="Prénom" value="{{$user->firstName}}">--}}
-                        {{--{!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}--}}
-                        {{--<input type="text" name="lastName" onKeyUp="showButton()" placeholder="Nom" value="{{$user->lastName}}">--}}
-                        {{--{!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}--}}
-                        {{--<input type="text" name="login" onKeyUp="showButton()" placeholder="User Name" value="{{$user->login}}">--}}
-                        {{--{!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}--}}
-                        {{--<input type="email" name="email" onKeyUp="showButton()" placeholder="votre Email" value="{{$user->email}}">--}}
-                        {{--{!! $errors->first('firstName', '<small class="help-block">:message</small>') !!}--}}
-                        {{--<form id="main-contact-form" class="contact-form row" action="{{route('sendMeinput type="hidden" name="_token" value="{{ csrf_token() }}">--}}
 
                             <div class="form-group col-md-6">
                                 <input type="text" name="nom" onKeyUp="showButton()" placeholder="Nom" class="form-control">
@@ -51,9 +42,12 @@
                             <div class="form-group col-md-12">
                                 <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Votre Message ici"></textarea>
                             </div>
-                            {{--<div class="form-group col-md-12">--}}
-                                {{--<input type="submit" name="submit" class="btn btn-primary pull-right" value="Envoyer">--}}
-                            {{--</div>--}}
+                        {!! NoCaptcha::display() !!}
+                        @if ($errors->has('g-recaptcha-response'))
+                            <span class="help-block">
+        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+    </span>
+                        @endif
                         {!! Form::submit('Valider', ['class' => 'btn btn-primary pull-right']) !!}
                         {!! Form::close() !!}
                         {{--</form>--}}

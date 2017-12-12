@@ -43,11 +43,13 @@
 
                     <div class="col-lg-6 col-xs-12">
                     {!! Form::label('name', 'Nom:',null, ['class' => 'form-control']) !!}
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             {!! Form::text('name',null, ['class' => 'form-control', 'placeholder' => 'Nom']) !!}
                             {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
-                    </div>
-                    {!! Form::label('gender', 'Genre:',null, ['class' => 'form-control']) !!}
+                         </div>
+
+                        {!! Form::label('gender', 'Genre:',null, ['class' => 'form-control']) !!}
                     <div class="form-group {!! $errors->has('idGender') ? 'has-error' : '' !!}">
                         {{ Form::select('idGender',$genderList,
                                         null,['class'=>'form-control','placeholder'=>'Genre du modele']) }}

@@ -72,6 +72,10 @@
 
                     <b>{{$order->user->adress
                     ->where('id', '=', $order->user->idFactAdress)
+                    ->first()->name  }}
+                    <br/>
+                        {{$order->user->adress
+                    ->where('id', '=', $order->user->idFactAdress)
                     ->first()->street . "&nbsp;"}}
 
                         {{$order->user->adress
@@ -94,28 +98,19 @@
 
                 <br>
                 <p>Adresse de livraison:<br>
-                    @if($order->user->idShipAdress1==$order->user->idFactAdress) <b>Idem</b>
-                    @else
-                    <b>{{$order->user->adress
-                    ->where('id', '=', $order->user->idShipAdress1)
-                    ->first()->street . "&nbsp;"}}
+{{--                    @if($order->idAdress==$order->user->idFactAdress) <b>Idem</b>--}}
+                    {{--@else--}}
+                    <b>{{$adress->name}}
+                        <br/>
+                        {{$adress->street . "&nbsp;"}}
+                        {{$adress->number }}<br>
+                        {{$adress->postCode."&nbsp; "}}
+                        {{$adress->city }}<br>
+                        {{$adress->country}};
 
-                    {{$order->user->adress
-                    ->where('id', '=', $order->user->idShipAdress1)
-                    ->first()->number }}<br>
 
-                    {{$order->user->adress
-                    ->where('id', '=', $order->user->idShipAdress1)
-                    ->first()->postCode."&nbsp; "}}
 
-                    {{$order->user->adress
-                    ->where('id', '=', $order->user->idShipAdress1)
-                    ->first()->city }}<br>
-
-                    {{$order->user->adress
-                    ->where('id', '=', $order->user->idShipAdress1)
-                    ->first()->country}}</b>
-                        @endif
+                        {{--@endif--}}
                </p>
             </div>
         </div>
@@ -163,9 +158,7 @@
 
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
-                                        {{--<a class="cart_quantity_up" href="{{route('cartUpdatePlus',['id'=>$productTemp->id, 'quantity'=> 1])}}"> + </a>--}}
                                      <h4>{{$productTemp->quantity}} </h4>
-                                        {{--<a class="cart_quantity_down " id="cart_quantity_down" href="{{route('cartUpdateMinus',['id'=>$productTemp->id, 'quantity'=>-1])}}"> - </a>--}}
                                     </div>
                                 </td>
 
@@ -175,10 +168,7 @@
                                 </td>
 
                                 <td class="cart_delete">
-                                    {{--{!! Form::open(['method' => 'GET', 'route' => ['cartDestroy', $productTemp->id,]]) !!}--}}
-                                    {{--{{Form::button('<i class="fa fa-times"></i>', ['type' => 'submit', 'class' => 'btn btn-flat cart_quantity_delete'] )  }}--}}
-                                    {{--{!! Form::close() !!}--}}
-                                    {{--<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>--}}
+
                                 </td>
                             </tr>
                             @php($sousTotal+=$sousTotalItem)
@@ -192,9 +182,7 @@
                                     <li>Sous-Total<span>{{number_format ($sousTotal,2)}} €</span></li>
                                     <li>Frais de livraison<span>
                         <?php
-                                            $deliveryCost=$user->adress
-                                                ->where('id', '=', $user->idShipAdress1)
-                                                ->first()->deliveryCost
+                                            $deliveryCost=$adress->deliveryCost
                                             ?>
                                             {{number_format ($deliveryCost,2)}} €
                     </span></li>

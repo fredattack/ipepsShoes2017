@@ -11,8 +11,8 @@ class User extends Authenticatable
 	use Notifiable;
     protected $table = 'users';
     public $timestamps = true;
-    protected $fillable = array('firstName', 'lastName', 'login', 'email','password', 'role','idFactAdress','idShipAdress1','idShipAdress2');
-    protected $visible = array('firstName', 'lastName', 'login', 'email','password', 'role','idFactAdress','idShipAdress1','idShipAdress2');
+    protected $fillable = array('id','firstName', 'lastName', 'login', 'email','password', 'role','idFactAdress','idShipAdress1','idShipAdress2');
+    protected $visible = array('id','firstName', 'lastName', 'login', 'email','password', 'role','idFactAdress','idShipAdress1','idShipAdress2');
 
 	protected $hidden = [
         'password', 'remember_token',

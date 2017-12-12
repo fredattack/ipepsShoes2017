@@ -78,8 +78,11 @@
                                         </li>
                                     </ul>
                                 </li>
-
-                                <li><a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i>Panier</a></li>
+        @php($itemsInCart= \App\TempOrderLine::where('idUser','=',Auth::user()->id)->count())
+                                <li><a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i>Panier&nbsp;
+                                        @if($itemsInCart!=0)
+                                        <small class="badge pull-right bg-red">{{$itemsInCart}}</small></a></li>
+                                        @endif
                             @elseif(Auth::user()->role=='seller')
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> Votre Compte <span class="caret"></span>

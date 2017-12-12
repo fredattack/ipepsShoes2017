@@ -52,13 +52,25 @@ class OrderController extends Controller
         return view('admin.order.show',compact(['order','orderLineList']));
   }
 
+    public function showListFront($id)
+    {
+        $user = \App\User::with(array('adress','order'))->findOrFail($id);
+        $orderList=\App\Order::with(array('user'))->where('idUser',$id)->orderBy('id')->get();
+        $totalUser=\App\Order::where('idUser',$id)->sum('TotalProducts');
+//      dd($totalUser);
+        return view('shop.user.orderListShow',compact(['user','orderList','totalUser']));
+    }
+
     public function showFront($id)
     {
-        $order = \App\Order::with(array('user','shipment','orderLine'))->findOrFail($id);
+        $order = \App\Order::with(array('user','orderLine'))->findOrFail($id);
         $productTempList=\App\OrderLine::with(array('shoe'))->where('idOrder',$id)->get();
-//        dd($orderLineList);
-        return view('Shop.orderShow',compact(['order','productTempList']));
+        $adress=\App\Adressorder::where('idOrder',$id)->first();
+//        dd($adress);
+        return view('Shop.user.orderShow',compact(['order','productTempList','adress']));
     }
+
+
   /**
    * Show the form for editing the specified resource.
    *

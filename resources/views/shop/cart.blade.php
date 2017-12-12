@@ -22,7 +22,7 @@
             </ul>
         </div>
     @endif
-    <section id="cart_items">
+    <section id="cart_items" style="min-height: 21em">
         <div class="container">
             @if(count($productTempList)==0)
                 <div class="alert alert-success" style="margin-bottom: 11em">
@@ -57,7 +57,14 @@
                             <h4><a href="">{{$productTemp->Shoe->Modele->name}} {{$productTemp->Shoe->Modele->gender->name}} T: {{$productTemp->Shoe->size}}  </a></h4>
                         </td>
                         <td class="cart_price">
-                            <p>{{$productTemp->Shoe->Modele->price}} €</p>
+                            <?php
+                            if($productTemp->Shoe->Modele->idReduction==1)
+                                $prixUnit= $productTemp->Shoe->Modele->price;
+                            else
+                                $prixUnit=$productTemp->Shoe->Modele->price-$productTemp->Shoe->Modele->price*$productTemp->Shoe->Modele->reduction->value/100;
+                            ?>
+
+                            <p>{{number_format ($prixUnit,2)}} </p>
                         </td>
                         <td class="cart_quantity">
                             <div class="cart_quantity_button">
@@ -67,7 +74,7 @@
                             </div>
                         </td>
                         <td class="cart_total">
-                            @php($sousTotalItem=$productTemp->Shoe->Modele->price*$productTemp->quantity)
+                            @php($sousTotalItem=$prixUnit*$productTemp->quantity)
                             <p class="cart_total_price">{{number_format ($sousTotalItem,2)}} €</p>
                         </td>
                         <td class="cart_delete">

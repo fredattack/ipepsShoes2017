@@ -33,6 +33,13 @@
     </section>
     <br>
 <div class="container">
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6 pull right">
+            <a class="btn btn-success btn-lg pull-right" href="{{route('downloadExcel','shipment')}}" style="margin-right: 2em;margin-top: 1em"><i class="fa fa-plus-square"></i> Exporter en csv</a>
+        </div>
+
+    </div>
 {{----------------------------------------------------------------------------------------------------------------------
 -
 -------------------------------------------------New Shipment--------------------------------------------------------------

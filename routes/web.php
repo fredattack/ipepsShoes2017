@@ -42,14 +42,36 @@ Route::get('/cartPlus/{id}/{quantity}', 'CartController@cartUpdatePlus')->name('
 Route::get('/cartMinus/{id}/{quantity}', 'CartController@cartUpdateMinus')->name('cartUpdateMinus');
 Route::get('/cart/{id}', 'CartController@destroy')->name('cartDestroy');
 Route::get('/checkOut', 'CheckOutController@show')->name('checkOut');
-Route::post('/checkOutAdress', 'CheckOutController@showCart')->name('checkOutAdress');
+Route::get('/checkOutAdress', 'CheckOutController@showCart')->name('checkOutAdress');
 Route::get('/checkOutCart', 'CheckOutController@showPaiement')->name('checkOutCart');
-Route::get('/PayOut/{total}', 'CheckOutController@makePaiement')->name('payOut');
+Route::get('/PayOut', 'CheckOutController@makePaiement')->name('payOut');
+
 Route::get('/user/{id}', 'UserController@showFront')->name('showFront');
-Route::post('/userUpdate', 'UserController@updateFront')->name('updateUser');
+
+Route::get('/userInfo/{id}', 'UserController@showUserInfo')->name('showUserInfo');
+Route::get('/userOrder/{id}', 'OrderController@showListFront')->name('showListFront');
+Route::get('/userAdress/{id}', 'AdressController@showAdressListFront')->name('showAdressListFront');
+Route::get('/userDefaultAdress/{id}', 'AdressController@userDefaultAdress')->name('userDefaultAdress');
+Route::post('/userUpdate/{id}', 'UserController@updateFront')->name('updateUser');
+Route::get('/ChangePassword', function () {
+    return view('shop.user.ChangePassword');
+})->name('ChangePassword');
+Route::post('/updatePassword', 'UserController@updatePassword')->name('updatePassword');
+
+
 Route::get('/order/{id}', 'OrderController@showFront')->name('showOrderFront');
 Route::get('/contact', 'ContactController@show')->name('contact');
 Route::post('/sendMessage', 'ContactController@sendMessage')->name('sendMessage');
+Route::resource('adress', 'AdressController');
+
+/*
+ * Paypal
+ *
+ */
+
+Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@payWithPaypal',));
+Route::post('paypal', array('as' => 'addmoney.paypal','uses' => 'AddMoneyController@postPaymentWithpaypal',));
+Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus',));
 
 
 /*
@@ -74,7 +96,6 @@ Route::group(['prefix'=>'admin','middleware' => 'admin'],function (){
     Route::resource('reduction', 'reductionController');
     Route::resource('type', 'TypeController');
     Route::resource('shipment', 'shipmentController');
-    Route::resource('adress', 'AdressController');
     Route::get('settings/product', 'AdminController@settingsProduct')->name('settingsProduct');
     Route::get('/stock/{shoe}', 'shoeController@stock')->name('stock');
     Route::post('/stockUpdate', 'shoeController@stockUpdate')->name('stockUpdate');
@@ -84,5 +105,6 @@ Route::group(['prefix'=>'admin','middleware' => 'admin'],function (){
     Route::get('upDateReduction',['uses'=>'ModeleController@upDateReduction', 'as'=>'upDateReduction']);
     Route::get('upDateRole',['uses'=>'UserController@upDateRole', 'as'=>'upDateRole']);
     Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('/excel/{type}', 'ExcelController@downloadExcel')->name('downloadExcel');
 
 });

@@ -16,8 +16,6 @@ class ModeleController extends Controller
   public function index()
   {
     $modeleList= \App\Modele::with(array('type','brand','gender'))->orderBy('idGender')->get();
-
-
     $genderList =\App\Gender::orderBy('id')->get();
     $reductionList =\App\Reduction::orderBy('id')->pluck('value','id');
 
@@ -129,14 +127,14 @@ class ModeleController extends Controller
    */
   public function store(Request $request)
   {
+//      dd($request);
       $this->validate($request, [
           'name' => 'bail|required|unique:modeles|max:100',
           'price' => 'bail|required|numeric',
-          'color'=>'bail|required|max:100',
+//          'color'=>'bail|required|max:100',
           'idGender'=>'required',
           'idBrand' => 'required',
           'idType'=>'required'
-
       ]);
 
       $model = $request->all();

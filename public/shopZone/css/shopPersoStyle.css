@@ -75,5 +75,60 @@
     font-size: 14px;
     line-height: 1.428571429;
     color: #333;
+}
 
+.logoUserShow{
+    height:6em;
+    width:6em;
+}
+
+.box{
+    border: 1px solid #B3AFA8;
+    padding:1em;
+    color:#696763;
+    margin: 1em;
+}
+
+.boxLinks{
+display: ruby;
+}
+
+.boxLinks a,.btn-link{
+    color: #8C8C88;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 5px 0;
+    display: inline;
+}
+
+
+.boxLinks a:hover,.btn-link:hover{
+    display: inline;
+    color:#669999;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#adressForm{
+    display: none;
+    margin-bottom: 2em;
+}
+
+
+.box h2{
+    color: #666663;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+}
+
+.box p{
+    color: #8C8C88;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 5px 0;
 }

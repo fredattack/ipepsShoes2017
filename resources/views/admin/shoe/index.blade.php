@@ -37,7 +37,16 @@
 
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Liste des Chaussures</h3>
+                    <div class="col-lg-6">
+                        <h3 class="box-title">Liste des Chaussures</h3>
+                    </div>
+
+                    <div class="col-lg-6 text-right">
+                        <a href="{{route("downloadExcel","shoe")}}"><button class="btn btn-success">Exporter en  CSV</button></a>
+
+                    </div>
+
+
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="myTable" class="table table-bordered table-hover">

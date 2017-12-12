@@ -39,24 +39,21 @@
                     @if ($errors->has('password'))<span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
                     @endif
 
-                    <span>
-                    <input type="checkbox" class="checkbox">
-                    Se souvenir de moi
-                    </span>
+
                         <button type="submit" class="btn btn-default">Connection</button>
                     </form>
-                        <div class="row">
-                            <h2 class="or">Ou</h2>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <a href="{{route('googleLogin',['service'=>'google'])}}" class="btn btn-lg btn-primary">Google</a>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <a href="{{route('googleLogin',['service'=>'facebook'])}}" class="btn btn-lg btn-primary">Facebook</a>
-                            </div>
 
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <a href="{{route('googleLogin',['service'=>'google'])}}" class="btn btn-lg btn-primary"><i class="fa fa-google-plus"> se connecter avec google     </i></a>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <a href="{{route('googleLogin',['service'=>'facebook'])}}" class="btn btn-lg btn-primary"><i class="fa fa-facebook"> se connecter avec facebook</i></a>
+                            </div>
+                        </div>
+
                     </div><!--/login form-->
 
                     </div>

@@ -1,6 +1,9 @@
 <?php 
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdressController extends Controller 
 {
@@ -30,8 +33,32 @@ class AdressController extends Controller
    *
    * @return Response
    */
-  public function store()
+  public function store(Request $request)
   {
+      $this->validate($request, [
+          
+          'name' => 'bail|required|string|max:100',
+          'street' => 'bail|required|string|max:100',
+          'number' => 'bail|required|string|max:5',
+          'postCode' => 'bail|required|max:50',
+          'city' => 'bail|required|string|max:50',
+          'country' => 'bail|required|string|max:50',
+      ]);
+
+      $newAdress = [];
+      $newAdress['idUser'] = Auth::User()->id;
+      $newAdress['name'] = $request->name;
+      $newAdress['street'] = $request->street;
+      $newAdress['number'] = $request->number;
+      $newAdress['postCode'] = $request->postCode;
+      $newAdress['city'] = $request->city;
+      $newAdress['country'] = $request->country;
+      $deliveryCost = $this->calculDeliveryCost($newAdress);
+      $newAdress['deliveryCost'] = $deliveryCost['cost'];
+      $newAdress['distance']= $deliveryCost['distance'];
+      \App\Adress::create($newAdress);
+
+      return redirect()->route('showAdressListFront',['id' =>  Auth::User()->id]);
     
   }
 
@@ -46,6 +73,20 @@ class AdressController extends Controller
     
   }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function showAdressListFront($id)
+    {
+        $adressList =\App\Adress::where('idUser',$id)->get();
+        $user = \App\User::with(array('adress','order'))->findOrFail($id);
+
+//        dd($adressList);
+        return view('shop.user.adressListShow',compact(['adressList','user']));
+    }
   /**
    * Show the form for editing the specified resource.
    *
@@ -63,9 +104,35 @@ class AdressController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function update($id)
+  public function update($id,Request $request)
   {
-    
+      $this->validate($request, [
+
+          'name' => 'bail|required|string|max:100',
+          'street' => 'bail|required|string|max:100',
+          'number' => 'bail|required|string|max:5',
+          'postCode' => 'bail|required|max:50',
+          'city' => 'bail|required|string|max:50',
+          'country' => 'bail|required|string|max:50',
+      ]);
+
+      $lAdresse = \App\Adress::findOrFail($id);
+      $input = $request->all();
+      $deliveryCost = $this->calculDeliveryCost($input);
+      $input['deliveryCost'] = $deliveryCost['cost'];
+      $input['distance']= $deliveryCost['distance'];
+      $lAdresse->fill($input)->save();
+
+      return redirect()->route('showAdressListFront',['id' =>  Auth::User()->id]);
+
+  }
+
+  public function userDefaultAdress($id){
+      $user=Auth::User();
+      $user->idShipAdress1=$id;
+      $user->save();
+//      dd($user);
+      return redirect()->route('showAdressListFront',['id' =>  Auth::User()->id]);
   }
 
   /**
@@ -76,8 +143,37 @@ class AdressController extends Controller
    */
   public function destroy($id)
   {
-    
+      $adress = \App\Adress::findOrFail($id);
+
+      $adress->delete();
+
+      return redirect()->route('showAdressListFront',['id' =>  Auth::User()->id]);
   }
+
+    public function calculDeliveryCost($adress)
+    {
+        $city='bruxelles';
+        $country='Belgium';
+        $distance = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=Huy,Belgique&destinations=$city,$country&key=AIzaSyCLizDL0kGcKNIuAn8XwFxDcNSQbuKTXvY";
+        $json = file_get_contents($distance);
+        $distance = json_decode($json, true);
+        $rows = $distance['rows'];
+        $rows = $rows[0];
+        $rows = $rows['elements'][0];
+        $rows = $rows['distance'];
+        $rows = $rows['value'];
+        $distance = $rows / 1000;
+
+        if ($distance < 15) {
+            $delivery['cost'] = 5.00;
+        } else {
+            $kiloMetreSup = $distance - 15;
+            $delivery['cost'] = 5.00 + ($kiloMetreSup * 0.1);
+        }
+
+        $delivery['distance']=$distance;
+        return $delivery;
+    }
   
 }
 

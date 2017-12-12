@@ -17,7 +17,9 @@ class ContactController extends Controller
           'nom' => 'bail|required|max:100',
           'email' => 'bail|required|email',
           'subject'=>'bail|required|string|max:50',
-          'message'=>'bail|required|string|max:500'
+          'message'=>'bail|required|string|max:500',
+          'g-recaptcha-response' => 'required|captcha'
+
       ]);
 
 
@@ -28,6 +30,8 @@ class ContactController extends Controller
           function($message) use ($request,$object){
               $message->to('fredmoras8@gmail.com')->subject($object);
               $message->from('fredmoras8@gmail.com','Formulaire de contact');
+//              $message->from($request['email'],'Formulaire de contact');
+
           });
       return view('shop.email.responseContact');
 

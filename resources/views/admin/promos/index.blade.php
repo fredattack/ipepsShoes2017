@@ -33,6 +33,13 @@
 
 
     <div class="row">
+        <div class="col-lg-6 text-right">
+
+        </div>
+        <div class="col-lg-6 text-right">
+            <a href="{{route("downloadExcel","promo")}}"><button class="btn btn-success">Exporter en  CSV</button></a>
+
+        </div>
     @foreach($genderList as $gender)
 
         <div class="col-lg-12">

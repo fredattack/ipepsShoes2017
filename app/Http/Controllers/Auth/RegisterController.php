@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -51,9 +51,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'firstName' => 'required|string|max:50',
             'lastName' => 'required|string|max:50',
-            'login' => 'required|string|max:50|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+//            'email' => 'required|string|email|max:255|unique:users',
+//            'password' => 'required|string|min:6|confirmed',
+//            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 
@@ -65,15 +65,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+//        dd('on y est');
 //        dd($data);
+        $this->sendConfirmation($data);
         return User::create([
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
-            'login' => $data['login'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role'=> 'client'
-
         ]);
+
+    }
+
+    protected function sendConfirmation(array $data)
+    {
+//dd(($data['email']));
+       Mail::send(['shop.email.register','shop.email.registerTexte'],[ 'clientName'=>$data['firstName'],
+            'clientEmail'=>$data['email']],
+            function($message) use ($data){
+                $message->to($data['email'])->subject('Enregistrement sur le site IpepsShoes');
+                $message->from('fredmoras8@gmail.com','IpepsShoes');
+            });
     }
 }

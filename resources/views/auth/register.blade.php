@@ -4,7 +4,9 @@
 @endsection
 
 @section('header')
+    {!! NoCaptcha::renderJs() !!}
     @include('shop.nav.header')
+
 @endsection
 
 @section('slider')
@@ -17,6 +19,7 @@
 
 @section('section')
     {{--<h1>Section</h1>--}}
+
     <div class="container">
         <section id="form"><!--form-->
 
@@ -39,9 +42,7 @@
                             {{--lastName--}}
                                     {!! Form::text('lastName',null, ['class' => 'form-control','placeholder'=>'Nom']) !!}
                                     {!! $errors->first('lastName', '<small class="help-block">:message</small>') !!}
-                            {{--login--}}
-                                    {!! Form::text('login',null, ['class' => 'form-control','placeholder'=>'Login']) !!}
-                                    {!! $errors->first('login', '<small class="help-block">:message</small>') !!}
+
                             {{--email--}}
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required>
                                      {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
@@ -50,9 +51,16 @@
                                     {!! $errors->first('password', '<small class="help-block">:message</small>') !!}
                             {{--password-confirm--}}
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Password Confirm " required>
+                            {!! NoCaptcha::display() !!}
+                            @if ($errors->has('g-recaptcha-response'))
+                                <span class="help-block">
+        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+    </span>
+                            @endif
                                     <button type="submit" class="btn btn-primary">
                                         S'enregistrer
                                     </button>
+
 
 
                         </form>
