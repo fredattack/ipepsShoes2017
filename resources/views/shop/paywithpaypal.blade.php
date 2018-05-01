@@ -8,20 +8,74 @@
 @endsection
 
 @section('slider')
-    {{--@include('shop.slider.mainSlider')--}}
 @endsection
 
 @section('asideLeft')
-    {{--@include('shop.nav.sideBar')--}}
 @endsection
 
 @section('section')
     <div class="container">
         <section id="cart_items">
             <div class="container">
-                <div class="col-lg-4"><h1>info</h1></div>
-                <div class="col-lg-4"><h1>facturation</h1></div>
-                <div class="col-lg-4"><h1>Livraison</h1></div>
+                <div class="col-lg-4">
+                    <h1>info</h1>
+                    <p>N° de client: <b>{{$user->id}}</b></p>
+                    <p>Nom: <b>{{$user->lastName}}</b></p>
+                    <p>Prénom: <b>{{$user->firstName}}</b></p>
+                    <P>Email: <b>{{$user->email}}</b></P>
+                </div>
+                <div class="col-lg-4">
+                    <h1>facturation</h1>
+                    {{$user->adress
+                    ->where('id', '=', $user->idFactAdress)
+                    ->first()->name  }}
+                        <br/>
+                        {{$user->adress
+                    ->where('id', '=', $user->idFactAdress)
+                    ->first()->street . "&nbsp;"}}
+
+                        {{$user->adress
+                    ->where('id', '=', $user->idFactAdress)
+                    ->first()->number }}<br>
+
+                        {{$user->adress
+                        ->where('id', '=', $user->idFactAdress)
+                        ->first()->postCode."&nbsp; "}}
+
+                        {{$user->adress
+                        ->where('id', '=', $user->idFactAdress)
+                        ->first()->city }}<br>
+
+                        {{$user->adress
+                        ->where('id', '=', $user->idFactAdress)
+                        ->first()->country}}</b>
+                </div>
+                <div class="col-lg-4">
+                    <h1>Livraison</h1>
+                    {{$user->adress
+                    ->where('id', '=', $user->idShipAdress1)
+                    ->first()->name  }}
+                    <br/>
+                    {{$user->adress
+                ->where('id', '=', $user->idShipAdress1)
+                ->first()->street . "&nbsp;"}}
+
+                    {{$user->adress
+                ->where('id', '=', $user->idShipAdress1)
+                ->first()->number }}<br>
+
+                    {{$user->adress
+                    ->where('id', '=', $user->idShipAdress1)
+                    ->first()->postCode."&nbsp; "}}
+
+                    {{$user->adress
+                    ->where('id', '=', $user->idShipAdress1)
+                    ->first()->city }}<br>
+
+                    {{$user->adress
+                    ->where('id', '=', $user->idShipAdress1)
+                    ->first()->country}}</b>
+                </div>
 
 
                 @if(count($productTempList)==0)
@@ -57,14 +111,21 @@
                                         <h4><a href="">{{$productTemp->Shoe->Modele->name}} {{$productTemp->Shoe->Modele->gender->name}} T: {{$productTemp->Shoe->size}}  </a></h4>
                                     </td>
                                     <td class="cart_price">
-                                        <p>{{$productTemp->Shoe->Modele->price}} €</p>
+                                        <?php
+                                        if($productTemp->Shoe->Modele->idReduction==1)
+                                            $prixUnit= $productTemp->Shoe->Modele->price;
+                                        else
+                                            $prixUnit=$productTemp->Shoe->Modele->price-$productTemp->Shoe->Modele->price*$productTemp->Shoe->Modele->reduction->value/100;
+                                        ?>
+
+                                        <p>{{number_format ($prixUnit,2)}} </p>
                                     </td>
                                     <td class="cart_quantity">
                                         <p>{{$productTemp->quantity}}</p>
 
                                     </td>
                                     <td class="cart_total">
-                                        @php($sousTotalItem=$productTemp->Shoe->Modele->price*$productTemp->quantity)
+                                        @php($sousTotalItem=$prixUnit*$productTemp->quantity)
                                         <p class="cart_total_price">{{number_format ($sousTotalItem,2)}} €</p>
                                     </td>
                                 </tr>
@@ -80,7 +141,6 @@
                 <div class="col-sm-6 pull-right">
                     <div class="total_area" >
                         <ul>
-                            @if($user->idFactAdress!=null)
                                 <li>Sous-Total<span>{{number_format ($sousTotal,2)}} €</span></li>
                                 <li>Frais de livraison:<span>
                         <?php
@@ -93,17 +153,8 @@
                                         {{number_format ($deliveryCost,2)}} €
                     </span></li>
                                 <li>Total <span> {{number_format ($total,2)}} €</span></li>
-                            @else
-                                <li>Sous-Total<span>{{number_format ($sousTotal,2)}} €</span></li>
-                                <li>Frais de livraison<span>
 
 
-                    A calculer
-                        </span></li>
-                                <li>Total <span>
-                         {{number_format ($sousTotal,2)}} €
-                        </span></li>
-                            @endif
                         </ul>
 
 
@@ -131,74 +182,14 @@
                         <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >
                             {{ csrf_field() }}
 
-                            {{--<?php $count =0;?>--}}
-                            {{--@foreach($productTempList as $productTemp)--}}
-                                {{--<?php $count++; ?>--}}
-                                {{--<input type="hidden" name="item_name_{{$count}}" value="{{$productTemp->Shoe->Modele->name}} {{$productTemp->Shoe->Modele->gender->name}} T: {{$productTemp->Shoe->size}}">--}}
-                                {{--<input type="hidden" name="quantity_{{$count}}" value="{{$productTemp->quantity}}">--}}
-                                {{--<input type="hidden" name="amount_{{$count}}" value="{{$productTemp->Shoe->Modele->price}}">--}}
-                        {{--@endforeach--}}
-                            {{--<input type="hidden" name="deliveryCost" value="{{$deliveryCost}}">--}}
-                            {{--<input type="hidden" name="amount" value="125">--}}
-                            {{--<input type="hidden" name="count" value="{{$count}}">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<div class="col-sm-6 pull-right">--}}
+
                                     <button type="submit" class="btn btn-primary  check_out pull-right">
-                                        Payer avec Paypal
+                                        Confirmer le payement
                                     </button>
-                                {{--</div>--}}
-                            {{--</div>--}}
+
                         </form>
     </div>
 
-
-        {{--<div class="container">--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-md-8 col-md-offset-2">--}}
-                    {{--<div class="panel panel-default">--}}
-                        {{--@if ($message = Session::get('success'))--}}
-                            {{--<div class="custom-alerts alert alert-success fade in">--}}
-                                {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>--}}
-                                {{--{!! $message !!}--}}
-                            {{--</div>--}}
-                            {{--<?php Session::forget('success');?>--}}
-                        {{--@endif--}}
-                        {{--@if ($message = Session::get('error'))--}}
-                            {{--<div class="custom-alerts alert alert-danger fade in">--}}
-                                {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>--}}
-                                {{--{!! $message !!}--}}
-                            {{--</div>--}}
-                            {{--<?php Session::forget('error');?>--}}
-                        {{--@endif--}}
-                        {{--<div class="panel-heading">Paywith Paypal</div>--}}
-                        {{--<div class="panel-body">--}}
-                            {{--<form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >--}}
-                                {{--{{ csrf_field() }}--}}
-                                {{--<div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">--}}
-                                    {{--<label for="amount" class="col-md-4 control-label">Amount</label>--}}
-                                    {{--<div class="col-md-6">--}}
-                                        {{--<input id="amount" type="text" class="form-control" name="amount" value="{{ old('amount') }}" autofocus>--}}
-                                        {{--@if ($errors->has('amount'))--}}
-                                            {{--<span class="help-block">--}}
-                                        {{--<strong>{{ $errors->first('amount') }}</strong>--}}
-                                    {{--</span>--}}
-                                        {{--@endif--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-
-                                {{--<div class="form-group">--}}
-                                    {{--<div class="col-md-6 col-md-offset-4">--}}
-                                        {{--<button type="submit" class="btn btn-primary">--}}
-                                            {{--Paywith Paypal--}}
-                                        {{--</button>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</form>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
 
 
 @endsection

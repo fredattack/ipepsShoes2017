@@ -65,7 +65,6 @@
                         <th style="min-width: 5em">Role</th>
                         <th>Adr. Facturation</th>
                         <th>Adr. Livraison</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -120,11 +119,7 @@
                                 @else <span class="glyphicon glyphicon-remove" style="color: red;"></span>
                                 @endif
                             </td>
-                            <td>
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['user.destroy', $user->id]]) !!}
-                                {!! Form::submit('Supprimer', ['class' => 'btn btn-danger btnProductAdmin', 'onclick' => 'return confirm(\'Voulez vous vraiment supprimer cet utilisateur ?\')'])  !!}
-                                {!! Form::close() !!}
-                            </td>
+
 
                         </tr>
                     @endforeach
@@ -144,7 +139,6 @@
                         <th>Role</th>
                         <th>Adr. Facturation</th>
                         <th>Adr. Livraison</th>
-                        <th></th>
                     </tr>
                     </tfoot>
                 </table>

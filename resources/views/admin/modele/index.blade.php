@@ -35,7 +35,7 @@
     @foreach($genderList as $gender)
 
         <div class="col-lg-12">
-            <h1.git class="productGenderTitleAdmin">{{$gender->name}} </h1.git>
+            <h1 class="productGenderTitleAdmin">{{$gender->name}} </h1>
 
             @foreach($modeleList as $modele)
                 @if($modele->idGender == $gender->id)
@@ -46,7 +46,7 @@
                                 <div class="col-lg-6 col-xs-12">
                                     <h3 class="box-title">{{$modele->name}}</h3>
                                 </div>
-                                <div class="col-lg-2 col-xs-6">
+                                <div class="col-lg-3 col-xs-6">
                                     {!! Form::open(['method' => 'GET', 'route' => ['modele.edit', $modele->id]]) !!}
                                     {!! Form::submit('Modifier', [ 'class' => 'btn btn-primary  btnProductAdmin', 'onclick' => '']) !!}
                                     {!! Form::close() !!}
@@ -75,7 +75,7 @@
                             </div><!-- en body-->
                             <div class="box-footer">
                                 <div class="row">
-                                    <div class="col-lg-3 ">
+                                    <div class="col-lg-3 text-center" >
                                         {!! Form::open(['method' => 'put', 'route' => ['modele.update', $modele->id,]]) !!}
                                         {!! Form::label('reduction', 'Promo:',null, ['class' => 'form-control ']) !!}
                                         <div class="form-group ">
@@ -83,17 +83,20 @@
                                             {!! Form::close() !!}
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 text-center">
+
+                                    <div class="col-lg-3 text-center" >
                                         @if($modele->idReduction!=1)
                                         <p class="badge  pagination-centered bg-red badgeReduction ">-{{$modele->reduction->value}}%</p>
                                             @endif
                                     </div>
-                                    <div class="col-lg-3 pull-right newPrice"><h1>{{number_format ($modele->price-$modele->price*$modele->reduction->value/100,2)}}€</h1></div>
 
-                                    <div class="col-lg-3">
-                                        @if($modele->idReduction!=1)
-                                        <h3 class="pull-right reducePrice" >{{$modele->price}}€</h3>
-                                            @endif
+                                    <div class="col-lg-3 text-center" >
+                                    @if($modele->idReduction!=1)
+                                            <p class="pull-right reducePrice" >{{$modele->price}}€</p>
+                                        @endif
+                                    </div>
+                                    <div class="col-lg-3  pull-right text-center " >
+                                        <h3>{{number_format ($modele->price-$modele->price*$modele->reduction->value/100,2)}}€</h3>
                                     </div>
 
 

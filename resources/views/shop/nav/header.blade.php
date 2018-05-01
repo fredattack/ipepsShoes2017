@@ -78,11 +78,14 @@
                                         </li>
                                     </ul>
                                 </li>
-        @php($itemsInCart= \App\TempOrderLine::where('idUser','=',Auth::user()->id)->count())
+                                 @php($itemsInCart= \App\TempOrderLine::where('idUser','=',Auth::user()->id)->count())
                                 <li><a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i>Panier&nbsp;
                                         @if($itemsInCart!=0)
                                         <small class="badge pull-right bg-red">{{$itemsInCart}}</small></a></li>
+                                 @else
+                                 </a></li>
                                         @endif
+
                             @elseif(Auth::user()->role=='seller')
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> Votre Compte <span class="caret"></span>
@@ -133,7 +136,7 @@
                 </div>
                 <div class="mainmenu pull-left">
                     <ul class="nav navbar-nav collapse navbar-collapse">
-                        <li><a href="{{route('shop')}}" id="homeLink" class="">Home</a></li>
+                        <li><a href="{{route('shop')}}" >Home</a></li>
                         <li class="dropdown"><a href="{{route('shop')}}" id="shopLink" class="">Shop<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
                                 <li><a href="{{route('shopFemme')}}">Femme</a></li>

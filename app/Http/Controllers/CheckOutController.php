@@ -6,6 +6,8 @@ use App\Adress;
 use App\Adressorder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
+
 use Session;
 
 class CheckOutController extends Controller
@@ -15,7 +17,7 @@ class CheckOutController extends Controller
 
     public function show(){
         session(['Url' => 'checkout']);
-        $user=\Auth::user();
+        $user=Auth::user();
 //        dd($user);
         $user=\App\User::with(array('adress'))->findOrFail($user->id);
         $productTempList=\App\TempCartItem::with('shoe')->where('idUser',$user->id)->orderBy('idShoe')->get();
@@ -26,7 +28,7 @@ class CheckOutController extends Controller
     public function showCart()
     {
 
-        $user=\Auth::user();
+        $user=Auth::user();
         session()->forget('Url');
 
 
@@ -88,7 +90,7 @@ class CheckOutController extends Controller
 
             }
 
-            return view('shop.confirmCheckOut');
+            return view('shop.confirmCheckOut',compact('productTempList'));
 
         } else dd('paiement refuser');
     }
@@ -118,7 +120,8 @@ class CheckOutController extends Controller
         $newAdressOrder->deliveryCost=$adressShipment->deliveryCost;
         $newAdressOrder->distance=$adressShipment->distance;
         $newAdressOrder->idOrder=$newOrder->id;
-//        dd($newAdressOrder);
+
+//        dd($adressShipment);
         $newAdressOrder->save();
     }
 

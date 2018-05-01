@@ -62,7 +62,7 @@
                                             <th>N°</th>
                                             <th>User Id</th>
                                             <th>Préparée</th>
-                                            <th>Livrée</th>
+                                            <th>Expédiée</th>
                                             <th>Total</th>
                                             <th>Date</th>
                                             <th></th>
@@ -108,18 +108,7 @@
                                         @endforeach
 
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th>N°</th>
-                                            <th>User Id</th>
-                                            <th>Préparée</th>
-                                            <th>Livrée</th>
-                                            <th>Total</th>
-                                            <th>Date</th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                        </tfoot>
+
                                     </table>
                                 </div>{{-- Box Body + table responsive--}}
 
@@ -154,10 +143,10 @@
                                                     <th>N°</th>
                                                     <th>User Id</th>
                                                     <th>Préparée</th>
-                                                    <th>Livrée</th>
+                                                    <th>Expédiée</th>
                                                     <th>Total</th>
                                                     <th>Date</th>
-                                                    <th></th>
+                                                    {{--<th></th>--}}
                                                     <th></th>
                                                 </tr>
                                                 </thead>
@@ -183,11 +172,9 @@
                                                         </td>
                                                         <td>{{$orderReady->totalProducts}}</td>
                                                         <td>{{$orderReady->created_at}}</td>
-                                                        <td>
-                                                            {!! Form::open(['method' => 'GET', 'route' => ['order.edit', $orderReady->id]]) !!}
-                                                            {!! Form::submit('Expédier', [ 'class' => 'btn btn-success  btnProductAdmin', 'onclick' => '']) !!}
-                                                            {!! Form::close() !!}
-                                                        </td>
+                                                        {{--<td>--}}
+
+                                                        {{--</td>--}}
                                                         <td>
                                                             {!! Form::open(['method' => 'GET', 'route' => ['order.show', $orderReady->id]])  !!}
                                                             {!! Form::submit('Details', ['class' => 'btn btn-warning  btnProductAdmin', 'onclick' => ''])  !!}
@@ -213,6 +200,13 @@
 </div>
 @endsection
 
+{{--@include('admin.modal.trackingNr')--}}
+{{--<script>--}}
+    {{--function PassVal(res)--}}
+    {{--{--}}
+        {{--$('#modalForm').attr('action', '/admin/shipment/'+res+'/edit');--}}
+    {{--}--}}
 
+{{--</script>--}}
 @section('footer')
 @endsection

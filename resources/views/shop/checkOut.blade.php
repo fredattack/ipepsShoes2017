@@ -41,15 +41,14 @@
                 </div>
             </div>
             <div class="col-sm-5 clearfix">
-                <div class="bill-to">
+                <div class="bill-to" >
                     {{--<p>Bill To</p>--}}
-                    <div class="box">
+                    <div class="box" style="margin-bottom: 3em">
                         <p>Adresse de Facturation</p>
                         {{--<form>--}}
 
                     @if($user->idFactAdress==null)
-                               {{--<h1>ajouter Adresse</h1>--}}
-                            <a  href="{{route('showAdressListFront',$user->id)}}" class="btn btn-primary  pull-right">
+                            <a  href="{{route('showAdressListFront',$user->id)}}" class="btn btn-primary  pull-right" >
                                 Ajouter une adresse
                             </a>
                             @else
@@ -105,22 +104,25 @@
                                 ->first()->country}}</p>
 
 
-
                             @endif
+                        @if($user->idShipAdress1!=null || $user->idFactAdress!=null)
+                        <a  href="{{route('showAdressListFront',$user->id)}}" class="btn btn-primary  pull-right" onclick="newSession()">
+                            Modifier
+                        </a>
                         {{--</form>--}}
+                            @endif
                     </div>
                 </div>
-                <a  href="{{route('showAdressListFront',$user->id)}}" class="btn btn-primary  pull-right" onclick="newSession()">
-                    Modifier
-                </a>
+
             </div>
             <div class="col-sm-4">
                 <div class="order-message">
                     <p>Remarque sur la livraison</p>
                     <textarea name="message"  placeholder="" rows="5"></textarea>
+                    @if($user->idShipAdress1!=null && $user->idFactAdress!=null)
 
                     <a href="{{route('checkOutAdress')}}" class='btn btn-default check_out pull-right'>Valider</a>
-
+@endif
 
                 </div>
             </div>
@@ -243,6 +245,7 @@
 
         {{--{!! Form::open(['method' => 'GET', 'route' => ['payOut',$total]]) !!}--}}
         {!! Form::open(['method' => 'GET', 'route' => ['addmoney.paywithpaypal']]) !!}
+{{--        {!! Form::open(['method' => 'GET', 'route' => ['payPremium']]) !!}--}}
 
         <input type="image" src="{{asset("/image/paypalLogo.jpg")}}" width="452" height="152" alt="Submit" class="pull-right" />
         {!! Form::close() !!}

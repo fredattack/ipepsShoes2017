@@ -8,11 +8,11 @@
 @endsection
 
 @section('slider')
-    @include('shop.slider.mainSlider')
+    {{--@include('shop.slider.mainSlider')--}}
 @endsection
 
 @section('asideLeft')
-    @include('shop.nav.sideBar')
+    {{--@include('shop.nav.sideBar')--}}
 @endsection
 
 @section('section')
@@ -68,7 +68,7 @@
 @endsection
 
 @section('bottomSlider')
-    @include('shop.slider.bottomSlider')
+    {{--@include('shop.slider.bottomSlider')--}}
     @endsection
 @section('footer')
     @include('shop.nav.footer')

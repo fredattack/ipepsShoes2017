@@ -44,7 +44,7 @@ Route::get('/cart/{id}', 'CartController@destroy')->name('cartDestroy');
 Route::get('/checkOut', 'CheckOutController@show')->name('checkOut');
 Route::get('/checkOutAdress', 'CheckOutController@showCart')->name('checkOutAdress');
 Route::get('/checkOutCart', 'CheckOutController@showPaiement')->name('checkOutCart');
-Route::get('/PayOut', 'CheckOutController@makePaiement')->name('payOut');
+Route::get('/PayOut/{total}', 'CheckOutController@makePaiement')->name('payOut');
 
 Route::get('/user/{id}', 'UserController@showFront')->name('showFront');
 
@@ -61,8 +61,11 @@ Route::post('/updatePassword', 'UserController@updatePassword')->name('updatePas
 
 Route::get('/order/{id}', 'OrderController@showFront')->name('showOrderFront');
 Route::get('/contact', 'ContactController@show')->name('contact');
+Route::get('/multi', 'ContactController@sendMultiMessage')->name('multi'); /*envoie de mail multiple*/
+
 Route::post('/sendMessage', 'ContactController@sendMessage')->name('sendMessage');
 Route::resource('adress', 'AdressController');
+
 
 /*
  * Paypal
@@ -73,9 +76,13 @@ Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'Ad
 Route::post('paypal', array('as' => 'addmoney.paypal','uses' => 'AddMoneyController@postPaymentWithpaypal',));
 Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus',));
 
+//Route::get('payPremium', ['as'=>'payPremium','uses'=>'PaypalController@payPremium']);
+//Route::post('getCheckout', ['as'=>'getCheckout','uses'=>'PaypalController@getCheckout']);
+//Route::get('getDone', ['as'=>'getDone','uses'=>'PaypalController@getDone']);
+//Route::get('getCancel', ['as'=>'getCancel','uses'=>'PaypalController@getCancel']);
+
 
 /*
-
 |--------------------------------------------------------------------------
 | adminPanel Routes
 |--------------------------------------------------------------------------

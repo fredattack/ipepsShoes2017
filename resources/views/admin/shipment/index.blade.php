@@ -103,7 +103,7 @@
                                                 <td> {{ $newShipment->updated_at}}</td>
                                                 <td>
                                                 {{--{!! Form::open(['method' => 'GET', 'route' => ['shipment.edit',  $newShipment->id]]) !!}--}}
-                                                    <button type="button" class="btn btn-success btnProductAdmin" {{--id="{{$newShipment->id}}"--}} data-toggle="modal" data-target="#TrackingNrModal" onclick="PassVal({{$newShipment->id}})">Expédier
+                                                    <button type="button" class="btn btn-success btnProductAdmin" {{--id="{{$newShipment->id}}"--}} data-toggle="modal" data-target="#TrackingNrModal" onclick="PassVal({{$newShipment->id}})">Expédier</button>
                                                     {{--{!! Form::submit('Expédier', [ 'class' => 'btn btn-success  btnProductAdmin', 'onclick' => '']) !!}--}}
                                                     {{--{!! Form::close() !!}--}}
                                                 </td>

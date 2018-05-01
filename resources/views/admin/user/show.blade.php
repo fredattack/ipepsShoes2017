@@ -47,12 +47,11 @@
                         </div>
                         <div class="col-lg-4 col-xs-12" >
                             <h2>user Id.:{{$user->id}}</h2>
-                            <h2>login: {{$user->login}}</h2>
                         </div>
                         <div class="col-lg-4 col-xs-12" >
                             @if($user->role=='client')
                                 <h3><b>Depuis le: {{date("d-m-Y", strtotime($user->created_at))}}</b></h3>
-                                <h3>Rôle: {{$user->role}}</h3>
+                                <h3><b>Rôle:</b> {{$user->role}}</h3>
                             @endif
                         </div>
                     </div>
@@ -70,6 +69,7 @@
                                             </div>
 
                                             <div class="box-body">
+                                                @if($user->idFactAdress!=null)
                                                 <br>
                                                 <p>Rue: <b>
                                                         {{$user->adress
@@ -94,6 +94,7 @@
                                                         ->where('id', '=', $user->idFactAdress)
                                                         ->first()->country }}
                                                     </b></p>
+                                                @endif
 
                                             </div>
                                             {{--<div class="box-footer">--}}
@@ -113,6 +114,7 @@
 
                                             <div class="box-body">
                                                 <br>
+                                                @if($user->idShipAdress1!=null)
                                                 <p>Rue: <b>
                                                         {{$user->adress
                                                         ->where('id', '=', $user->idShipAdress1)
@@ -136,7 +138,7 @@
                                                         ->where('id', '=', $user->idShipAdress1)
                                                         ->first()->country }}
                                                     </b></p>
-
+                                                @endif
                                             </div>
                                             {{--<div class="box-footer">--}}
                                                 {{--<h1 class="box-title">Footer</h1>--}}
@@ -203,10 +205,7 @@
 
 
                     </div>
-                    <div class="box-footer">
-                        <h1 class="box-title">Footer</h1>
 
-                    </div>
                 </div>
 
     </div>

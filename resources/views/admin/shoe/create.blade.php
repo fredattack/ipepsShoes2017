@@ -34,7 +34,7 @@
 
     <div class="row">
         <div class="box box-primary createFormModele">
-            {{Form::open(array('route' => 'checkOutAdress'))}}
+            {{Form::open(array('route' => 'shoe.store'))}}
             {{ Form::hidden('idModele', $leModele->id) }}
             <div class="row">
                 <div class="col-lg-4 col-xs-12">

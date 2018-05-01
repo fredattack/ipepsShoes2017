@@ -128,10 +128,16 @@ class AdressController extends Controller
   }
 
   public function userDefaultAdress($id){
-      $user=Auth::User();
+     $user=Auth::user();
+    if($user->idFactAdress==null)
+    {
+        $user->idFactAdress=$id;
+        $user->idShipAdress1=$id;
+    }
       $user->idShipAdress1=$id;
       $user->save();
 //      dd($user);
+//      $idUser=$user->id;
       return redirect()->route('showAdressListFront',['id' =>  Auth::User()->id]);
   }
 

@@ -37,19 +37,19 @@ class ExcelController extends Controller
 
     public function arrayOfShoes()
     {
-        dd('dans les shoes');
+//        dd('dans les shoes');
         $sheet = Excel::create('ShoesList', function ($excel) {
 
             $excel->sheet('New sheet', function ($sheet) {
 
                 $sheet->loadView('admin.excel.exportShoes');
 
-            })->download('xlsm');
+            })->download('csv');
 
         });
     }
         public function arrayOfModeles(){
-        dd('dans le modele');
+//        dd('dans le modele');
 
             $sheet= Excel::create('ModeleList', function($excel) {
 
@@ -57,13 +57,13 @@ class ExcelController extends Controller
 
                     $sheet->loadView('admin.excel.exportModeles');
 
-                })->download('xlsm');
+                })->download('csv');
 
             });
     }
 
     public function arrayOfModelesEnPromos(){
-        dd('dans les promos');
+//        dd('dans les promos');
 
         $sheet= Excel::create('PromoList', function($excel) {
 
@@ -71,7 +71,7 @@ class ExcelController extends Controller
 
                 $sheet->loadView('admin.excel.exportModelesEnPromo');
 
-            })->download('xlsm');
+            })->download('csv');
 
         });
     }
@@ -85,7 +85,7 @@ class ExcelController extends Controller
 
                 $sheet->loadView('admin.excel.exportOrders');
 
-            })->download('xlsm');
+            })->download('csv');
 
         });
     }
@@ -99,7 +99,7 @@ class ExcelController extends Controller
 
                 $sheet->loadView('admin.excel.exportShipments');
 
-            })->download('xlsm');
+            })->download('csv');
 
         });
     }
@@ -113,7 +113,7 @@ class ExcelController extends Controller
 
                 $sheet->loadView('admin.excel.exportUsers');
 
-            })->download('xlsm');
+            })->download('csv');
 
         });
     }

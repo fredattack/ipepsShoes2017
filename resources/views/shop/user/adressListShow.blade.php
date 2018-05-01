@@ -30,7 +30,7 @@
     </div>
     <div class="row">
         <div class="step-one">
-            <h2 class="heading">Vos adresses </h2>
+            <h2 class="heading">Vos adresses</h2>
         </div>
     </div>
 

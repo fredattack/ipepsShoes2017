@@ -2,4 +2,4 @@
 
 
 
-<p>Vous êtes bien enregistré sur le site IPEPSShoes.... blabla </p>
+<p>Vous êtes bien enregistré sur le site ScarpeFine....</p>

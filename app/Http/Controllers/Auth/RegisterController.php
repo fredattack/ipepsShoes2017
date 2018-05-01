@@ -51,9 +51,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'firstName' => 'required|string|max:50',
             'lastName' => 'required|string|max:50',
-//            'email' => 'required|string|email|max:255|unique:users',
-//            'password' => 'required|string|min:6|confirmed',
-//            'g-recaptcha-response' => 'required|captcha'
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 
@@ -84,8 +84,8 @@ class RegisterController extends Controller
        Mail::send(['shop.email.register','shop.email.registerTexte'],[ 'clientName'=>$data['firstName'],
             'clientEmail'=>$data['email']],
             function($message) use ($data){
-                $message->to($data['email'])->subject('Enregistrement sur le site IpepsShoes');
-                $message->from('fredmoras8@gmail.com','IpepsShoes');
+                $message->to($data['email'])->subject('Enregistrement sur le site ScarpeFine');
+                $message->from('messagerie@qualitytraiteur.be','ScarpeFine');
             });
     }
 }

@@ -52,6 +52,10 @@ return [
         'client_secret' => 'your-facebook-app-secret',
         'redirect' => 'http://your-callback-url',
     ],
+//    'paypal' => [
+//        'client_id' => 'AR9fdEaUfnkuKNji2itrCyAVzRhBDU8XPIr01nMd3gIR76Va4w5ZMdo5d1pIVpulE53iBls_U_PzykEG',
+//        'secret' => 'EE24MVMtKg0dKP3ryC-L19B2ujW0dt-aFUghVp72i-NPtyhfJYW0dKtyDos7tlunD9bg0qTc9-qrPCCT'
+//    ],
     
 
 ];

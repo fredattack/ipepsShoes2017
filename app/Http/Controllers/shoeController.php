@@ -95,7 +95,7 @@ class shoeController extends Controller
       $shoesList =\App\Shoe::where('idModele',$id)->get();
       $similarList=\App\Modele::where('idType',$leModele->idType)->where('idGender',$leModele->idGender)->get();
       if(count($similarList)<3)  $similarList=\App\Modele::where('idGender',$leModele->idGender)->get();
-//      dd($similarList);
+//      dd($shoesList);
       return view('shop.product',compact(['leModele','shoesList','similarList']));
 
   }

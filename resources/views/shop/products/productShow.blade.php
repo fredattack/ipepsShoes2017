@@ -15,6 +15,7 @@
                     ?>
                     <img src={{$src}} alt="" />
                     <h3>ZOOM</h3>
+                    {{--todo add fancybox--}}
                 </div>
             </div>
 
@@ -43,6 +44,11 @@
                 </div>
 
                     <div class="col-sm-6">
+                        @if(count($shoesList) ==0)
+                            <div class="alert alert-danger text-center" style="margin-right: 2em ">
+                                <p>ce produit est momentanément indisponible.</p>
+                            </div>
+                        @else
                         <label >Taille:</label>
                             <select class="form-control selectSize " name="size" style="width:5em">
                                 @foreach($shoesList as $shoe)
@@ -53,6 +59,8 @@
                                     @endif
                                 @endforeach
                             </select>
+
+                        @endif
                     </div>
             </div>
                     <div class="row" style="margin-top: 1em">

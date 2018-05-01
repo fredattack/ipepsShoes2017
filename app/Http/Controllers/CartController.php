@@ -13,7 +13,7 @@ class CartController extends Controller
 
 
    public function show(){
-       $user=\Auth::user();
+       $user=Auth::user();
        $user=\App\User::with(array('adress'))->findOrFail($user->id);
        $productTempList=\App\TempCartItem::with('shoe')->where('idUser',$user->id)->orderBy('idShoe')->get();
 //       dd($productTempList);
@@ -23,7 +23,7 @@ class CartController extends Controller
 
    public function storeInSession(Request $request){
 //       dd($request);
-       $id=\Auth::user()->id;
+       $id=Auth::user()->id;
        $shoe= \App\Shoe::with('modele')->where('idModele',$request->idModele)->where('size',$request->size)->firstOrFail();
 //       dd($shoe);
        if(\App\TempCartItem::where('idShoe',$shoe->id)->count()==0)

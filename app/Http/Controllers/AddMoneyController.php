@@ -11,7 +11,7 @@ use Input;
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Amount;
-//use PayPal\Api\Details;
+use PayPal\Api\Details;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
@@ -52,6 +52,7 @@ class AddMoneyController extends HomeController
 
 //        return view('shop.checkOut',compact(['productTempList','user','step']));
         return view('shop.paywithpaypal',compact(['productTempList','user','step']));
+//        return view('shop.paywithpaypal');
     }
     /**
      * Store a details of payment with paypal.
@@ -62,8 +63,11 @@ class AddMoneyController extends HomeController
     public function postPaymentWithpaypal(Request $request)
     {
         $user=\Auth::user();
+//        dd($user->idShipAdress1);
         $productTempList=\App\TempCartItem::with('shoe')->where('idUser',$user->id)->orderBy('idShoe')->get();
-
+        $deliveryCost=$user->adress
+            ->where('id', '=', $user->idShipAdress1)
+            ->first()->deliveryCost;
 
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
@@ -73,7 +77,7 @@ class AddMoneyController extends HomeController
 //        Par Default
 //
 //////////////////////////////////////////
-
+//
 //
 //        $item_list = new ItemList();
 //
@@ -101,7 +105,7 @@ class AddMoneyController extends HomeController
 
 
         $item_list = new ItemList();
-$total=0;
+        $total=0;
         foreach($productTempList as $productTemp)
         {
 
@@ -121,16 +125,17 @@ $total=0;
             $total+=$prixUnit*$productTemp->quantity;
             $item_list->addItem($var);
         }
-
-        $deliveryCost = new Item();
-        $deliveryCost ->setName('Frais de livraison') /** item name **/
+        $delivery = new Item();
+        $delivery->setName('Frais de livraison') /** item name **/
                 ->setCurrency('EUR')
                 ->setQuantity(1)
-                ->setPrice($request->deliveryCost); /** unit price **/
+                ->setPrice($deliveryCost); /** unit price **/
 
-        $item_list->addItem($deliveryCost);
-        $total+=$request->deliveryCost;
-
+        $item_list->addItem($delivery);
+        $total+=$deliveryCost;
+//        dd($item_list);
+        \Session::put('total',$total);
+//dd($deliveryCost);
 //        dd($request);
 //dd($total);
 //
@@ -184,6 +189,7 @@ $total=0;
     }
     public function getPaymentStatus()
     {
+        $total=Session::get('total');
         /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
         /** clear the session payment ID **/
@@ -207,7 +213,9 @@ $total=0;
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
             Session::put('success','Payment success');
-            return Redirect::route('addmoney.paywithpaypal');
+//            return Redirect::route('addmoney.paywithpaypal');
+            return Redirect::route('payOut',$total);
+
         }
         Session::put('error','Payment failed');
         return Redirect::route('addmoney.paywithpaypal');
